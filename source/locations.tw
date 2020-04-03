@@ -1,0 +1,75 @@
+::Hub
+!Where would you like to go?
+[[Lobby->Lobby]]
+[[Security Office->SecurityOffice]]
+[[Break Room->BreakRoom]]
+[[Conference Room->ConferenceRoom]]
+[[Lab->Lab]]
+
+::Lobby
+!Lobby
+<<nobr>>
+<<set $location to "lobby">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::SecurityOffice
+!Security Office
+<<nobr>>
+<<set $location to "security_office">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::BreakRoom
+!Break Room
+<<nobr>>
+<<set $location to "break_room">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::ConferenceRoom
+!Conference Room
+<<nobr>>
+<<set $location to "conference_room">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::Lab
+!Lab
+<<nobr>>
+<<set $location to "lab">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::PeopleStories
+    <<nobr>>
+    <<set _names to ["_ninja_boy", "_science_boy", "_joan", "_jonah", "_grumpy_granny", "_security_officer_lady"]>>
+    <<set _people to $places[$location].people>>
+    /% Set the location. %/
+    <<print "<<set _" + $location + " to true>>\\">>
+    /% Set what characters are in the same room as the player. %/
+    <<for _i to 0; _i < _names.length; _i++>>
+        <<set _name to _names[_i]>>
+        <<if _people[_name]>><<print "<<set " + _name + " to true>>\\">><</if>>
+    <</for>>
+    <<set _saying to QBN.cards(1)>>
+    <<if _saying.length>>
+        <<includeall _saying>>
+    <</if>>
+    /% Clean up the temporary variables for characters that are in the same room as the player. %/
+    <<for _i to 0; _i < _names.length; _i++>>
+        <<print "<<unset " + _name + ">>\\">>
+    <</for>>
+    /% Clean up the location temporary variable. %/
+    <<print "<<unset _" + $location + ">>\\">>
+    <</nobr>>
