@@ -1,0 +1,231 @@
+:: StoryData
+{
+    "ifid": "DE4C5720-830B-452B-9B90-C9AC5DFF2E8C"
+}
+
+::StoryTitle
+The Mystery of the Stolen Cookie
+
+::StoryInit
+<<set $places to 
+{
+    "lobby":{"people":{"_ninja_boy":true}},
+    "lab":{"people":{"_science_boy":true}},
+    "security_office":{"people":{"_security_officer_lady":true}},
+    "break_room":{"people":{"_grumpy_granny":true}},
+    "conference_room":{"people":{"_joan":true,"_jonah":true}}
+}>>
+<<set $location to "lobby">>
+<<progress "$cookie_clues" "no_quest" "quest" "cookie_thief_discovered">>
+
+::Start
+!The stolen cookie
+The doors slam shut. A voice comes over the load speaker. "I know one of you little twerps stole my cookie!" said a female voice. "None of you are leaving until you fess up" she said angrily.
+
+[[Next->Intro-1]]
+
+::Intro-1
+You and five others are standing in the lobby of a large company headquarters. The security officer has just locked all the doors from her office. "Look what you children have done now!" said an elderly woman. "We didn't" started a girl with a pink bow in her hair, "do anything" finished an identical twin girl with a red bow. The people leave the lobby and spread throughout the building.
+
+[[Next->Hub]]
+
+::Hub
+!Where would you like to go?
+[[Lobby->Lobby]]
+[[Security Office->SecurityOffice]]
+[[Break Room->BreakRoom]]
+[[Conference Room->ConferenceRoom]]
+[[Lab->Lab]]
+
+::Lobby
+!Lobby
+<<nobr>>
+<<set $location to "lobby">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::SecurityOffice
+!Security Office
+<<nobr>>
+<<set $location to "security_office">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::BreakRoom
+!Break Room
+<<nobr>>
+<<set $location to "break_room">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::ConferenceRoom
+!Conference Room
+<<nobr>>
+<<set $location to "conference_room">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::Lab
+!Lab
+<<nobr>>
+<<set $location to "lab">>
+<<include PeopleStories>>
+<</nobr>>
+
+[[Go somewhere else -> Hub]]
+
+::GenericSecurityOffice [sticky-card req-security_office]
+A loud beep causes you to jump.
+
+::GenericLobby [sticky-card req-lobby]
+You look at the empty couches. It's so boring here.
+
+::NinjaBoySwordSwing [sticky-card req-ninja_boy]
+A child swings an imaginary sword and whispers dramatically "I'm one with the shadows. Whoosh whoosh".
+
+::NinjaBoyLobbyAmbush [sticky-card req-ninja_boy req-lobby]
+"Hyaa!" A child jumps out from behind the reception desk and stabs you in the back with an imaginary sword.
+
+::SecurityOfficerLadyMurmurs [sticky-card req-security_officer_lady]
+You hear some murmuring in the back of the office "Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?".
+
+::SecurityOfficerLady [card req-security_officer_lady urgent]
+<<nobr>>
+Hey twerp. I'll make a deal with you. If you figure out who stole my cookie, I'll give you 20 bucks! Now get out of here. Shoo.
+<<addcard SecurityOfficerLadyGives20Bucks>>
+<<advance "$cookie_clues" "quest">>
+<</nobr>>
+
+::SecurityOfficerLadyGives20Bucks [req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered urgent]
+You actually figured it out? "20 bucks"? What? Oh that. I was just kidding. Your real reward is that you get to leave this building. I've unlocked the doors. Get out of here you twerp.
+
+::JoanAndJonahComplain [sticky-card req-joan req-jonah]
+A girl with a pink bow says "I can't believe how mean the security lady is". A girl with a red bow replies "Yeah. Even the grumpy granny is nicer than she is".
+
+::ScienceBoyInTheLab [sticky-card req-science_boy req-lab]
+A green smoke plume comes flowing out from behind one of the lab tables. It's better if you don't go near it.
+
+::GrumpyGrannyIsGrumpy [sticky-card req-grumpy_granny]
+"What are you doing here? Get out of here" says an old lady.
+
+::GrumpyGrannyCaught [card req-grumpy_granny req-break_room]
+<<nobr>>
+You see an elderly lady quickly turn to hide her face. She clearly had crumbs all over her face...cookie crumbs!
+<<advance "$cookie_clues" "cookie_thief_discovered">>
+<</nobr>>
+
+::Characters
+Twins Joan (pink bow) and Jonah (red bow); Grumpy Granny; Ninja Boy; Science Boy
+Security officer lady
+
+::Locations
+Lobby, lab, security office, break room, conference room
+
+::PeopleStories
+    <<nobr>>
+    <<set _names to ["_ninja_boy", "_science_boy", "_joan", "_jonah", "_grumpy_granny", "_security_officer_lady"]>>
+    <<set _people to $places[$location].people>>
+    /% Set the location. %/
+    <<print "<<set _" + $location + " to true>>\\">>
+    /% Set what characters are in the same room as the player. %/
+    <<for _i to 0; _i < _names.length; _i++>>
+        <<set _name to _names[_i]>>
+        <<if _people[_name]>><<print "<<set " + _name + " to true>>\\">><</if>>
+    <</for>>
+    <<set _saying to QBN.cards(1)>>
+    <<if _saying.length>>
+        <<includeall _saying>>
+    <</if>>
+    /% Clean up the temporary variables for characters that are in the same room as the player. %/
+    <<for _i to 0; _i < _names.length; _i++>>
+        <<print "<<unset " + _name + ">>\\">>
+    <</for>>
+    /% Clean up the location temporary variable. %/
+    <<print "<<unset _" + $location + ">>\\">>
+    <</nobr>>
+
+::TinyQBN Widgets [widget]
+/*
+ * Comma-separated lists: call with "linkto" for links instead
+ * of contents.
+ */
+
+<<widget "cardlist">>\
+<<includeall $args[0] `$args[1] or "content"` "comma">>\
+<</widget>>
+
+/*
+ * Rows and columns of card contents in boxes: call with "linkbox"
+ * for links, or "coverbox" for covers.
+ */
+
+<<widget "cardcolumn">>@@.qbn-column;
+<<includeall $args[0] `$args[1] or "contentbox"`>>
+@@<</widget>>
+
+<<widget "cardrow">>@@.qbn-row;
+<<includeall $args[0] `$args[1] or "contentbox"`>>
+@@<</widget>>
+
+
+/* Comma separator (no serial comma). */
+
+<<widget "comma">><<if $args[0]>> and <<else>>, <</if>><</widget>>
+
+
+/* Wrapper widgets (card contents or links, optionally boxed). */
+
+<<widget "cover">>\
+<<set _qbn_cover to true>><<includecard $args[0]>><<unset _qbn_cover>>\
+<</widget>>
+
+<<widget "content">><<if `QBN.available($args[0])`>>\
+<<unset _qbn_cover>><<includecard $args[0]>><<removecard $args[0] false>>\
+<</if>><</widget>>
+
+<<widget "linkto">><<print '[\[' + $args[0] + ']]'>><</widget>>
+
+<<widget "coverbox">>@@.qbn-card;
+<<cover $args[0]>>
+@@<</widget>>
+
+<<widget "contentbox">>@@.qbn-card;
+<<content $args[0]>>
+@@<</widget>>
+
+<<widget "linkbox">>@@.qbn-card;
+<<linkto $args[0]>>
+@@<</widget>>
+
+
+/* Conditional Links */
+
+<<widget "linkif">>\
+<<if $args[0]>><<= '[\['+($args[2] or $args[1])+'->'+$args[1]+']]'>>\
+<<else>>@@.qbn-nolink;<<= $args[2] or $args[1]>>@@<</if>>\
+<</widget>>
+
+<<widget "linkcontents">><<linkif `QBN.available($args[1] or QBN.current)` `$args[1] or QBN.current` $args[0]>><</widget>>
+
+
+/* Choice helpers */
+
+<<widget "skillcheck">>\
+<<set _qbnsuccess to $args[0].check($args[1])>>\
+<</widget>>
+
+<<widget "gotoresult">>\
+<<if _qbnsuccess>><<set $args[0] to $args[0] + ' ' + Success>><</if>>\
+<<if State.random() < 0.20 and Story.get('Rare ' + $args[0])>>\
+<<set $args[0] to 'Rare ' + $args[0]>>\
+<</if>>\
+<<unset _qbnsuccess>><<removecard _qbncurrent false>><<goto $args[0]>>\
+<</widget>>
