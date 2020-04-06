@@ -11,7 +11,10 @@
 <<nobr>>
 <<set $location to "lobby">>
 <<include PeopleStories>>
-<</nobr>>
+<</nobr>>\
+<<nobr>>
+<<include StoryChoices>>
+<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -20,7 +23,10 @@
 <<nobr>>
 <<set $location to "security_office">>
 <<include PeopleStories>>
-<</nobr>>
+<</nobr>>\
+<<nobr>>
+<<include StoryChoices>>
+<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -29,7 +35,10 @@
 <<nobr>>
 <<set $location to "break_room">>
 <<include PeopleStories>>
-<</nobr>>
+<</nobr>>\
+<<nobr>>
+<<include StoryChoices>>
+<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -38,7 +47,10 @@
 <<nobr>>
 <<set $location to "conference_room">>
 <<include PeopleStories>>
-<</nobr>>
+<</nobr>>\
+<<nobr>>
+<<include StoryChoices>>
+<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -47,7 +59,10 @@
 <<nobr>>
 <<set $location to "lab">>
 <<include PeopleStories>>
-<</nobr>>
+<</nobr>>\
+<<nobr>>
+<<include StoryChoices>>
+<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -72,4 +87,11 @@
     <</for>>
     /% Clean up the location temporary variable. %/
     <<print "<<unset _" + $location + ">>\\">>
+    <</nobr>>
+
+::StoryChoices
+    <<nobr>>
+    <<set _choice to true>>
+    <<cardcolumn `QBN.cards().sort(QBN.alphabetically)` "linkbox">>
+    <<unset _choice>>
     <</nobr>>

@@ -1,11 +1,11 @@
 /% Security office %/\
-::GenericSecurityOffice [sticky-card req-security_office]
+::GenericSecurityOffice [sticky-card req-security_office req-not-choice]
 A loud beep causes you to jump.\
 \
-::SecurityOfficerLadyMurmurs [sticky-card req-security_officer_lady req-security_office]
+::SecurityOfficerLadyMurmurs [sticky-card req-security_officer_lady req-security_office req-not-choice]
 You hear some murmuring in the back of the office "Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?".\
 \
-::SecurityOfficerLady [card req-security_officer_lady req-security_office urgent]
+::SecurityOfficerLady [card req-security_officer_lady req-security_office req-not-choice urgent]
 <<nobr>>
 Hey twerp. I'll make a deal with you. If you figure out who stole my cookie, I'll give you 20 bucks! Now get out of here. Shoo.
 <<addcard SecurityOfficerLadyGives20Bucks>>
@@ -13,52 +13,61 @@ Hey twerp. I'll make a deal with you. If you figure out who stole my cookie, I'l
 <</nobr>>\
 \
 /% Security Officer Lady %/\
-::SecurityOfficerLadyGives20Bucks [req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered urgent]
+::SecurityOfficerLadyGives20Bucks [req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent]
 You actually figured it out? "20 bucks"? What? Oh that. I was just kidding. Your real reward is that you get to leave this building. I've unlocked the doors. Get out of here you twerp.\
 \
 /% Lobby %/\
-::GenericLobby [sticky-card req-lobby]
+::GenericLobby [sticky-card req-lobby req-not-choice]
 You look at the empty couches. It's so boring here.\
 \
-::NinjaBoyLobbyAmbush [sticky-card req-ninja_boy req-lobby]
+::NinjaBoyLobbyAmbush [sticky-card req-ninja_boy req-lobby req-not-choice]
 "Hyaa!" A child jumps out from behind the reception desk and stabs you in the back with an imaginary sword.\
 \
 /% Ninja Boy %/\
-::NinjaBoySwordSwing [sticky-card req-ninja_boy]
+::NinjaBoySwordSwing [sticky-card req-ninja_boy req-not-choice]
 A child swings an imaginary sword and whispers dramatically "I'm one with the shadows. Whoosh whoosh".\
 \
-::NinjaBoyDiscussesCuteGirls [sticky-card req-ninja_boy]
+::NinjaBoyDiscussesCuteGirls [sticky-card req-ninja_boy req-not-choice]
 A child does a dramatic Ninja pose. He then says "Those cute twins couldn't resist this"!\
 \
 /% Twins %/\
-::JoanAndJonahComplain [sticky-card req-joan req-jonah]
+::JoanAndJonahComplain [sticky-card req-joan req-jonah req-not-choice]
 A girl with a pink bow says "I can't believe how mean the security lady is". A girl with a red bow replies "Yeah. Even the grumpy granny is nicer than she is".\
 \
-::JoanAndJonahDiscussBoys [sticky-card req-joan req-jonah]
+::JoanAndJonahDiscussBoys [sticky-card req-joan req-jonah req-not-choice]
 A girl with a pink bow says "That little Ninja Boy is kind of cute". A girl with a red bow replies "But he's dumb. I like that little Science Boy better".\
 \
 /% Lab %/\
-::ScienceBoyInTheLab [sticky-card req-science_boy req-lab]
+::ScienceBoyInTheLab [sticky-card req-science_boy req-lab req-not-choice]
 A green smoke plume comes flowing out from behind one of the lab tables. It's better if you don't go near it.\
 \
 /% Science Boy %/\
-::ScienceBoyDiscussesGirls [sticky-card req-science_boy]
+::ScienceBoyDiscussesGirls [sticky-card req-science_boy req-not-choice]
 A small boy wearing an adult's lab coat says, without taking his eyes off of a bubbling purple liquid he is pouring, "Get out of here. You girls are in the way."\
 \
 /% Break Room %/\
-::GrumpyGrannyCaught [card req-grumpy_granny req-break_room]
+::GrumpyGrannyCaught [card req-grumpy_granny req-break_room req-cookie_clues-during-quest req-not-choice]
 <<nobr>>
 You see an elderly lady quickly turn to hide her face. She clearly had crumbs all over her face...cookie crumbs!
 <<advance "$cookie_clues" "cookie_thief_discovered">>
 <</nobr>>\
 \
-::GrumpyGrannyLookingForNomNoms [sticky-card req-grumpy_granny req-break_room]
+::GrumpyGrannyLookingForNomNoms [sticky-card req-grumpy_granny req-break_room req-not-choice]
 An elderly lady is searching through cabinets. "There must be something around here I can eat" she says.\
 \
 /% Grumpy Granny %/\
-::GrumpyGrannyIsGrumpy [sticky-card req-grumpy_granny]
+::GrumpyGrannyIsGrumpy [sticky-card req-grumpy_granny req-not-choice]
 "What are you doing here? Get out of here you runt" says an old lady.\
 \
+/% Choices. %/\
+::Confront the elderly lady about the cookie crumbs [card req-choice req-grumpy_granny req-cookie_clues-during-cookie_thief_discovered]
+"I didn't do anything you sneaky lying brat!"
+[[Yikes!->Hub]]
+
+::Who's who? [card req-choice req-joan req-jonah]
+"We feel so insulted" said the girl with the pink bow. "We're never talking to you again" said the girl with the red bow.
+[[That's too bad.->Hub]]
+
 /%
 Science Boy blamed story
     One story can be to put chocolate chips in one of Science Boy's experiments. Then he can be blamed for stealing the cookie. To do this, you need to lure Grumpy Granny away from the break room. Once that is done, you need to look through the cabinets and take chocolate chips. Then you need to lure Science Boy out of the Lab. Finally, you need to put the chocolate chips in a vial and take the vial to the Security Officer Lady.
