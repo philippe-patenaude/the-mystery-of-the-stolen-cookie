@@ -91,7 +91,11 @@
 
 ::StoryChoices
     <<nobr>>
+    /% Set the location. %/
+    <<print "<<set _" + $location + " to true>>\\">>
     <<set _choice to true>>
     <<cardcolumn `QBN.cards().sort(QBN.alphabetically)` "linkbox">>
     <<unset _choice>>
+    /% Clean up the location temporary variable. %/
+    <<print "<<unset _" + $location + ">>\\">>
     <</nobr>>

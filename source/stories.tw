@@ -7,14 +7,16 @@ You hear some murmuring in the back of the office "Should I have an oatmeal rais
 \
 ::SecurityOfficerLady [card req-security_officer_lady req-security_office req-not-choice urgent]
 <<nobr>>
-Hey twerp. I'll make a deal with you. If you figure out who stole my cookie, I'll give you 20 bucks! Now get out of here. Shoo.
-<<addcard SecurityOfficerLadyGives20Bucks>>
+Hey twerp. I'll make a deal with you. If you figure out who stole my cookie, I'll give you one of my favorite cookies! Now get out of here. Shoo.
+<<addcard SecurityOfficerLadyGivesReward sticky>>
 <<advance "$cookie_clues" "quest">>
 <</nobr>>\
 \
 /% Security Officer Lady %/\
-::SecurityOfficerLadyGives20Bucks [req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent]
-You actually figured it out? "20 bucks"? What? Oh that. I was just kidding. Your real reward is that you get to leave this building. I've unlocked the doors. Get out of here you twerp.\
+::SecurityOfficerLadyGivesReward [req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent]
+"You actually figured it out? Well, here's your reward." She opens a display case next to her desk and pulls out a cookie. "I've had this cookie since I was in high school. My crush gave it to me, so I couldn't part with it. I've moved on now, so it's all yours." Eww. "I've unlocked the doors. Now get out of here you twerp."
+
+[[Leave]]
 \
 /% Lobby %/\
 ::GenericLobby [sticky-card req-lobby req-not-choice]
@@ -59,14 +61,68 @@ An elderly lady is searching through cabinets. "There must be something around h
 ::GrumpyGrannyIsGrumpy [sticky-card req-grumpy_granny req-not-choice]
 "What are you doing here? Get out of here you runt" says an old lady.\
 \
+/% Any %/\
+::CanIBeADetective [card important req-cookie_clues-during-quest req-not-choice]
+I just had a brilliant idea! I could could dress up like a detective and hunt for clues!
+I would need:
+* A detective's hat
+* A trench coat
+* A magnifying glass
+* A pipe
+\
+<<advance "$detective" "making_of_a_detective">>\
+\
 /% Choices. %/\
 ::Confront the elderly lady about the cookie crumbs [card req-choice req-grumpy_granny req-cookie_clues-during-cookie_thief_discovered]
 "I didn't do anything you sneaky lying brat!"
-[[Yikes!->Hub]]
 
-::Who's who? [card req-choice req-joan req-jonah]
+[[Yikes!->Hub]]
+\
+::Ask the twins "Who's who"? [card req-choice req-joan req-jonah]
 "We feel so insulted" said the girl with the pink bow. "We're never talking to you again" said the girl with the red bow.
+
 [[That's too bad.->Hub]]
+\
+::Search the lobby for detective outfits [card important req-choice req-lobby req-detective-during-making_of_a_detective]
+After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
+<<set $detective_pipe to true>>\
+<<include DetectiveEquipment>>\
+[[Woo hoo!->Hub]]
+\
+::Search the security office for detective outfits [card important req-choice req-security_office req-detective-during-making_of_a_detective]
+You found a dusty detective's hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
+<<set $detective_hat to true>>\
+<<include DetectiveEquipment>>\
+[[Woo hoo!->Hub]]
+\
+::Search the break room for detective outfits [card important req-choice req-break_room req-detective-during-making_of_a_detective]
+In the first cabinet you open, you find a pristine trench coat folded up nicely. It's in your size as well. Sweet!
+<<set $detective_trench_coat to true>>\
+<<include DetectiveEquipment>>\
+[[Woo hoo!->Hub]]
+\
+::Search the conference room for detective outfits [card important req-choice req-conference_room req-detective-during-making_of_a_detective]
+You search the conference room top to bottom left to right. You only find skeletons in the closet. Oh well.
+
+[[Gotta look elsewhere->Hub]]
+\
+::Search the lab for detective outfits [card important req-choice req-lab req-detective-during-making_of_a_detective]
+You look on every pile of junk then look through every drawer. In the end, you found a magnifying glass in the trash can! You wipe the mayonnaise off and stick it in your pocket.
+<<set $detective_magnifying_glass to true>>\
+<<include DetectiveEquipment>>\
+[[Woo hoo!->Hub]]
+\
+/% The end %/
+::Leave
+!The mystery is solved!
+You gleefully leave the building.
+\
+/% Other %/
+::DetectiveEquipment
+<<if $detective_hat and $detective_magnifying_glass and $detective_pipe and $detective_trench_coat>>
+    <strong>I have everything I need to be a detective. I am...the <em>determined detective</em>!</strong>
+    <<advance "$detective" "determined_detective">>\
+<</if>>\
 
 /%
 Science Boy blamed story
@@ -77,13 +133,32 @@ Science Boy blamed story
     How to lure Science Boy away from his experiments in the lab? Maybe getting him to look for new resources or to look at something sciencey in another room (tesla coil? VR headset?).
 
 Detective story
-    You get excited about your task and dress up as a detective to investigate the mystery. You need to find a detective's hat (what are they called?), a magnifying glass, a detective's coat (trench coat?), and a pipe. You will then be able to use these to discover one or more clues as to who caused the crime. Maybe you can interview people and look for crumbs with the magnifying glass.
+    You get excited about your task and dress up as a detective to investigate the mystery. You need to find a detective's hat (they are called deerstalker), a magnifying glass, a detective's coat (trench coat), and a pipe. You will then be able to use these to discover one or more clues as to who caused the crime. Maybe you can interview people and look for crumbs with the magnifying glass.
 
     You won't be able to investigate the kitchenette until Grumpy Granny is sent somewhere else.
+
+    Pipe: In lobby
+    Hat: Security office
+    Magnifying glass: In lab
+    Coat: Break room
 
 Telling the twins apart
     One of the twins will ask you who she is. After you tell her, she will say you are wrong. You have to double down on saying who she is. If you do (and get it right), then you will get 1 reputation with each of the twins.
 
 Jonah's (red bow) love potion (requires 1 reputation with Jonah)
     Jonah gets you to ask Science Boy to create a love potion. Once he creates the love potion, then you will give it to Jonah. Jonah will get you to secretly give it to him. Once Science Boy drinks the "love potion", he gets sick.
+
+Granny lure
+    Mess with something that Granny has such as food or a coat.
+
+Science boy lure
+    Tell the science boy that there is a tesla coil in a different room.
+
+Determined detective stories
+    There will be one clue that the determined detective can find in each room. You become the determined detective once you get all the pieces required to make the detective outfit.
+    Lobby: hidden cookies
+    Security Office: muddy footprints
+    Break Room: Cookie crumbs
+    Conference Room: suspicious coat
+    Lab: tbd
 %/

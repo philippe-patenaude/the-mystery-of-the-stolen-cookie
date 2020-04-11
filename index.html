@@ -187,9 +187,13 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
     /% Clean up the location temporary variable. %/
     &lt;&lt;print &quot;&lt;&lt;unset _&quot; + $location + &quot;&gt;&gt;\\&quot;&gt;&gt;
     &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="StoryChoices" tags="" position="975,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+    /% Set the location. %/
+    &lt;&lt;print &quot;&lt;&lt;set _&quot; + $location + &quot; to true&gt;&gt;\\&quot;&gt;&gt;
     &lt;&lt;set _choice to true&gt;&gt;
     &lt;&lt;cardcolumn `QBN.cards().sort(QBN.alphabetically)` &quot;linkbox&quot;&gt;&gt;
     &lt;&lt;unset _choice&gt;&gt;
+    /% Clean up the location temporary variable. %/
+    &lt;&lt;print &quot;&lt;&lt;unset _&quot; + $location + &quot;&gt;&gt;\\&quot;&gt;&gt;
     &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="StoryInit" tags="" position="1100,100" size="100,100">&lt;&lt;set $places to 
 {
     &quot;lobby&quot;:{&quot;people&quot;:{&quot;_ninja_boy&quot;:true}},
@@ -199,20 +203,24 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
     &quot;conference_room&quot;:{&quot;people&quot;:{&quot;_joan&quot;:true,&quot;_jonah&quot;:true}}
 }&gt;&gt;
 &lt;&lt;set $location to &quot;lobby&quot;&gt;&gt;
-&lt;&lt;progress &quot;$cookie_clues&quot; &quot;no_quest&quot; &quot;quest&quot; &quot;cookie_thief_discovered&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Start" tags="" position="1225,100" size="100,100">!The stolen cookie
+&lt;&lt;progress &quot;$cookie_clues&quot; &quot;no_quest&quot; &quot;quest&quot; &quot;cookie_thief_discovered&quot;&gt;&gt;
+&lt;&lt;progress &quot;$detective&quot; &quot;normal_boy&quot; &quot;making_of_a_detective&quot; &quot;determined_detective&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Start" tags="" position="1225,100" size="100,100">!The stolen cookie
 The doors slam shut. A voice comes over the load speaker. &quot;I know one of you little twerps stole my cookie!&quot; said a female voice. &quot;None of you are leaving until you fess up&quot; she said angrily.
 
-[[Next-&gt;Intro-1]]</tw-passagedata><tw-passagedata pid="11" name="Intro-1" tags="" position="100,225" size="100,100">You and five others are standing in the lobby of a large company headquarters. The security officer has just locked all the doors from her office. &quot;Look what you children have done now!&quot; said an elderly woman. &quot;We didn&#39;t&quot; started a girl with a pink bow in her hair, &quot;do anything&quot; finished an identical twin girl with a red bow. The people leave the lobby and spread throughout the building.
+[[Next-&gt;Intro-1]]</tw-passagedata><tw-passagedata pid="11" name="Intro-1" tags="" position="100,225" size="100,100">!Realization
+You and five others are standing in the lobby of a large company headquarters. The security officer has just locked all the doors from her office. &quot;Look what you children have done now!&quot; said an elderly woman. &quot;We didn&#39;t&quot; started a girl with a pink bow in her hair, &quot;do anything&quot; finished an identical twin girl with a red bow. The people leave the lobby and spread throughout the building.
 
 [[Next-&gt;Hub]]</tw-passagedata><tw-passagedata pid="12" name="GenericSecurityOffice" tags="sticky-card req-security_office req-not-choice" position="225,225" size="100,100">A loud beep causes you to jump.\
 \</tw-passagedata><tw-passagedata pid="13" name="SecurityOfficerLadyMurmurs" tags="sticky-card req-security_officer_lady req-security_office req-not-choice" position="350,225" size="100,100">You hear some murmuring in the back of the office &quot;Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?&quot;.\
 \</tw-passagedata><tw-passagedata pid="14" name="SecurityOfficerLady" tags="card req-security_officer_lady req-security_office req-not-choice urgent" position="475,225" size="100,100">&lt;&lt;nobr&gt;&gt;
-Hey twerp. I&#39;ll make a deal with you. If you figure out who stole my cookie, I&#39;ll give you 20 bucks! Now get out of here. Shoo.
-&lt;&lt;addcard SecurityOfficerLadyGives20Bucks&gt;&gt;
+Hey twerp. I&#39;ll make a deal with you. If you figure out who stole my cookie, I&#39;ll give you one of my favorite cookies! Now get out of here. Shoo.
+&lt;&lt;addcard SecurityOfficerLadyGivesReward sticky&gt;&gt;
 &lt;&lt;advance &quot;$cookie_clues&quot; &quot;quest&quot;&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 \
-/% Security Officer Lady %/\</tw-passagedata><tw-passagedata pid="15" name="SecurityOfficerLadyGives20Bucks" tags="req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent" position="600,225" size="100,100">You actually figured it out? &quot;20 bucks&quot;? What? Oh that. I was just kidding. Your real reward is that you get to leave this building. I&#39;ve unlocked the doors. Get out of here you twerp.\
+/% Security Officer Lady %/\</tw-passagedata><tw-passagedata pid="15" name="SecurityOfficerLadyGivesReward" tags="req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent" position="600,225" size="100,100">&quot;You actually figured it out? Well, here&#39;s your reward.&quot; She opens a display case next to her desk and pulls out a cookie. &quot;I&#39;ve had this cookie since I was in high school. My crush gave it to me, so I couldn&#39;t part with it. I&#39;ve moved on now, so it&#39;s all yours.&quot; Eww. &quot;I&#39;ve unlocked the doors. Now get out of here you twerp.&quot;
+
+[[Leave]]
 \
 /% Lobby %/\</tw-passagedata><tw-passagedata pid="16" name="GenericLobby" tags="sticky-card req-lobby req-not-choice" position="725,225" size="100,100">You look at the empty couches. It&#39;s so boring here.\
 \</tw-passagedata><tw-passagedata pid="17" name="NinjaBoyLobbyAmbush" tags="sticky-card req-ninja_boy req-lobby req-not-choice" position="850,225" size="100,100">&quot;Hyaa!&quot; A child jumps out from behind the reception desk and stabs you in the back with an imaginary sword.\
@@ -235,9 +243,48 @@ You see an elderly lady quickly turn to hide her face. She clearly had crumbs al
 \
 /% Grumpy Granny %/\</tw-passagedata><tw-passagedata pid="26" name="GrumpyGrannyIsGrumpy" tags="sticky-card req-grumpy_granny req-not-choice" position="725,350" size="100,100">&quot;What are you doing here? Get out of here you runt&quot; says an old lady.\
 \
-/% Choices. %/\</tw-passagedata><tw-passagedata pid="27" name="Confront the elderly lady about the cookie crumbs" tags="card req-choice req-grumpy_granny req-cookie_clues-during-cookie_thief_discovered" position="850,350" size="100,100">&quot;I didn&#39;t do anything you sneaky lying brat!&quot;
-[[Yikes!-&gt;Hub]]</tw-passagedata><tw-passagedata pid="28" name="Who&#39;s who?" tags="card req-choice req-joan req-jonah" position="975,350" size="100,100">&quot;We feel so insulted&quot; said the girl with the pink bow. &quot;We&#39;re never talking to you again&quot; said the girl with the red bow.
+/% Any %/\</tw-passagedata><tw-passagedata pid="27" name="CanIBeADetective" tags="card important req-cookie_clues-during-quest req-not-choice" position="850,350" size="100,100">I just had a brilliant idea! I could could dress up like a detective and hunt for clues!
+I would need:
+* A detective&#39;s hat
+* A trench coat
+* A magnifying glass
+* A pipe
+\
+&lt;&lt;advance &quot;$detective&quot; &quot;making_of_a_detective&quot;&gt;&gt;\
+\
+/% Choices. %/\</tw-passagedata><tw-passagedata pid="28" name="Confront the elderly lady about the cookie crumbs" tags="card req-choice req-grumpy_granny req-cookie_clues-during-cookie_thief_discovered" position="975,350" size="100,100">&quot;I didn&#39;t do anything you sneaky lying brat!&quot;
+
+[[Yikes!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="29" name="Ask the twins &quot;Who&#39;s who&quot;?" tags="card req-choice req-joan req-jonah" position="1100,350" size="100,100">&quot;We feel so insulted&quot; said the girl with the pink bow. &quot;We&#39;re never talking to you again&quot; said the girl with the red bow.
+
 [[That&#39;s too bad.-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="30" name="Search the lobby for detective outfits" tags="card important req-choice req-lobby req-detective-during-making_of_a_detective" position="1225,350" size="100,100">After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
+&lt;&lt;set $detective_pipe to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="31" name="Search the security office for detective outfits" tags="card important req-choice req-security_office req-detective-during-making_of_a_detective" position="100,475" size="100,100">You found a dusty detective&#39;s hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
+&lt;&lt;set $detective_hat to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="32" name="Search the break room for detective outfits" tags="card important req-choice req-break_room req-detective-during-making_of_a_detective" position="225,475" size="100,100">In the first cabinet you open, you find a pristine trench coat folded up nicely. It&#39;s in your size as well. Sweet!
+&lt;&lt;set $detective_trench_coat to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="33" name="Search the conference room for detective outfits" tags="card important req-choice req-conference_room req-detective-during-making_of_a_detective" position="350,475" size="100,100">You search the conference room top to bottom left to right. You only find skeletons in the closet. Oh well.
+
+[[Gotta look elsewhere-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="34" name="Search the lab for detective outfits" tags="card important req-choice req-lab req-detective-during-making_of_a_detective" position="475,475" size="100,100">You look on every pile of junk then look through every drawer. In the end, you found a magnifying glass in the trash can! You wipe the mayonnaise off and stick it in your pocket.
+&lt;&lt;set $detective_magnifying_glass to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+\
+/% The end %/</tw-passagedata><tw-passagedata pid="35" name="Leave" tags="" position="600,475" size="100,100">!The mystery is solved!
+You gleefully leave the building.
+\
+/% Other %/</tw-passagedata><tw-passagedata pid="36" name="DetectiveEquipment" tags="" position="725,475" size="100,100">&lt;&lt;if $detective_hat and $detective_magnifying_glass and $detective_pipe and $detective_trench_coat&gt;&gt;
+    &lt;strong&gt;I have everything I need to be a detective. I am...the &lt;em&gt;determined detective&lt;/em&gt;!&lt;/strong&gt;
+    &lt;&lt;advance &quot;$detective&quot; &quot;determined_detective&quot;&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
 
 /%
 Science Boy blamed story
@@ -248,16 +295,35 @@ Science Boy blamed story
     How to lure Science Boy away from his experiments in the lab? Maybe getting him to look for new resources or to look at something sciencey in another room (tesla coil? VR headset?).
 
 Detective story
-    You get excited about your task and dress up as a detective to investigate the mystery. You need to find a detective&#39;s hat (what are they called?), a magnifying glass, a detective&#39;s coat (trench coat?), and a pipe. You will then be able to use these to discover one or more clues as to who caused the crime. Maybe you can interview people and look for crumbs with the magnifying glass.
+    You get excited about your task and dress up as a detective to investigate the mystery. You need to find a detective&#39;s hat (they are called deerstalker), a magnifying glass, a detective&#39;s coat (trench coat), and a pipe. You will then be able to use these to discover one or more clues as to who caused the crime. Maybe you can interview people and look for crumbs with the magnifying glass.
 
     You won&#39;t be able to investigate the kitchenette until Grumpy Granny is sent somewhere else.
+
+    Pipe: In lobby
+    Hat: Security office
+    Magnifying glass: In lab
+    Coat: Break room
 
 Telling the twins apart
     One of the twins will ask you who she is. After you tell her, she will say you are wrong. You have to double down on saying who she is. If you do (and get it right), then you will get 1 reputation with each of the twins.
 
 Jonah&#39;s (red bow) love potion (requires 1 reputation with Jonah)
     Jonah gets you to ask Science Boy to create a love potion. Once he creates the love potion, then you will give it to Jonah. Jonah will get you to secretly give it to him. Once Science Boy drinks the &quot;love potion&quot;, he gets sick.
-%/</tw-passagedata><tw-passagedata pid="29" name="TinyQBN Widgets" tags="widget" position="1100,350" size="100,100">/*
+
+Granny lure
+    Mess with something that Granny has such as food or a coat.
+
+Science boy lure
+    Tell the science boy that there is a tesla coil in a different room.
+
+Determined detective stories
+    There will be one clue that the determined detective can find in each room. You become the determined detective once you get all the pieces required to make the detective outfit.
+    Lobby: hidden cookies
+    Security Office: muddy footprints
+    Break Room: Cookie crumbs
+    Conference Room: suspicious coat
+    Lab: tbd
+%/</tw-passagedata><tw-passagedata pid="37" name="TinyQBN Widgets" tags="widget" position="850,475" size="100,100">/*
  * Comma-separated lists: call with &quot;linkto&quot; for links instead
  * of contents.
  */

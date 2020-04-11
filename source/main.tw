@@ -17,6 +17,7 @@ The Mystery of the Stolen Cookie
 }>>
 <<set $location to "lobby">>
 <<progress "$cookie_clues" "no_quest" "quest" "cookie_thief_discovered">>
+<<progress "$detective" "normal_boy" "making_of_a_detective" "determined_detective">>
 
 ::Start
 !The stolen cookie
@@ -25,6 +26,7 @@ The doors slam shut. A voice comes over the load speaker. "I know one of you lit
 [[Next->Intro-1]]
 
 ::Intro-1
+!Realization
 You and five others are standing in the lobby of a large company headquarters. The security officer has just locked all the doors from her office. "Look what you children have done now!" said an elderly woman. "We didn't" started a girl with a pink bow in her hair, "do anything" finished an identical twin girl with a red bow. The people leave the lobby and spread throughout the building.
 
 [[Next->Hub]]
