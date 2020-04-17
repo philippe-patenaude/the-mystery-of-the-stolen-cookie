@@ -87,7 +87,7 @@ I would need:
 After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
 <<set $detective_pipe to true>>\
 <<include DetectiveEquipment>>\
-[[Woo hoo!->Hub]]
+[[Eek!->Hub]]
 \
 ::Search the security office for detective outfits [card important req-choice req-security_office req-detective-during-making_of_a_detective]
 You found a dusty detective's hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
@@ -111,6 +111,31 @@ You look on every pile of junk then look through every drawer. In the end, you f
 <<set $detective_magnifying_glass to true>>\
 <<include DetectiveEquipment>>\
 [[Woo hoo!->Hub]]
+\
+::Search the lobby for clues [card important req-choice req-lobby req-detective-during-determined_detective]
+You use your super genius detective deductive skills to find a pile of cookies stashed away under a couch cushion.
+
+[[They must be sampled!->Hub]]
+\
+::Search the security office for clues [card important req-choice req-security_office req-detective-during-determined_detective]
+You turn on your extreme cyber punk detective perception. You find muddy footprints leading out of the office. You make a cast of the footprints using toothpaste.
+
+[[Now to find the suspect!->Hub]]
+\
+::Search the break room clues [card important req-choice req-break_room req-detective-during-determined_detective]
+You take out the mayonnaise streaked magnifying glass and search every square inch of the donuts on the counter. After enjoying a donut, you then find cookie crumbs in the sink.
+
+[[It seems you found the scene of the crime!->Hub]]
+\
+::Search the conference room for clues [card important req-choice req-conference_room req-detective-during-determined_detective]
+You turn on your detective x-ray vision and find a suspicious coat in the closet. It looks like it is big enough to hide cookies! You take the coat off of the skeleton and take it with you as evidence.
+
+[[The evidence is mounting!->Hub]]
+\
+::Search the lab for clues [card important req-choice req-lab req-detective-during-determined_detective]
+You search the lab and find a thing.
+
+[[Yay! Now I have a thing!->Hub]]
 \
 /% The end %/
 ::Leave
@@ -161,4 +186,11 @@ Determined detective stories
     Break Room: Cookie crumbs
     Conference Room: suspicious coat
     Lab: tbd
+
+You can interrogate people about the clues
+    Who hid the cookies? (Grumpy Granny; she then forgot about them)
+    Who left the muddy footprints in the security office and why? (Ninja Boy using a twin's shoes as a "distraction")
+    Who left the cookie crumbs? (Grumpy Granny)
+    Who owned the coat? (Science Boy; couldn't wear the lab coat over his regular coat; left it on a skeleton)
+    Tbd
 %/

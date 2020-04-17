@@ -261,7 +261,7 @@ I would need:
 \</tw-passagedata><tw-passagedata pid="30" name="Search the lobby for detective outfits" tags="card important req-choice req-lobby req-detective-during-making_of_a_detective" position="1225,350" size="100,100">After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
 &lt;&lt;set $detective_pipe to true&gt;&gt;\
 &lt;&lt;include DetectiveEquipment&gt;&gt;\
-[[Woo hoo!-&gt;Hub]]
+[[Eek!-&gt;Hub]]
 \</tw-passagedata><tw-passagedata pid="31" name="Search the security office for detective outfits" tags="card important req-choice req-security_office req-detective-during-making_of_a_detective" position="100,475" size="100,100">You found a dusty detective&#39;s hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
 &lt;&lt;set $detective_hat to true&gt;&gt;\
 &lt;&lt;include DetectiveEquipment&gt;&gt;\
@@ -277,11 +277,26 @@ I would need:
 &lt;&lt;set $detective_magnifying_glass to true&gt;&gt;\
 &lt;&lt;include DetectiveEquipment&gt;&gt;\
 [[Woo hoo!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="35" name="Search the lobby for clues" tags="card important req-choice req-lobby req-detective-during-determined_detective" position="600,475" size="100,100">You use your super genius detective deductive skills to find a pile of cookies stashed away under a couch cushion.
+
+[[They must be sampled!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="36" name="Search the security office for clues" tags="card important req-choice req-security_office req-detective-during-determined_detective" position="725,475" size="100,100">You turn on your extreme cyber punk detective perception. You find muddy footprints leading out of the office. You make a cast of the footprints using toothpaste.
+
+[[Now to find the suspect!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="37" name="Search the break room clues" tags="card important req-choice req-break_room req-detective-during-determined_detective" position="850,475" size="100,100">You take out the mayonnaise streaked magnifying glass and search every square inch of the donuts on the counter. After enjoying a donut, you then find cookie crumbs in the sink.
+
+[[It seems you found the scene of the crime!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="38" name="Search the conference room for clues" tags="card important req-choice req-conference_room req-detective-during-determined_detective" position="975,475" size="100,100">You turn on your detective x-ray vision and find a suspicious coat in the closet. It looks like it is big enough to hide cookies! You take the coat off of the skeleton and take it with you as evidence.
+
+[[The evidence is mounting!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="39" name="Search the lab for clues" tags="card important req-choice req-lab req-detective-during-determined_detective" position="1100,475" size="100,100">You search the lab and find a thing.
+
+[[Yay! Now I have a thing!-&gt;Hub]]
 \
-/% The end %/</tw-passagedata><tw-passagedata pid="35" name="Leave" tags="" position="600,475" size="100,100">!The mystery is solved!
+/% The end %/</tw-passagedata><tw-passagedata pid="40" name="Leave" tags="" position="1225,475" size="100,100">!The mystery is solved!
 You gleefully leave the building.
 \
-/% Other %/</tw-passagedata><tw-passagedata pid="36" name="DetectiveEquipment" tags="" position="725,475" size="100,100">&lt;&lt;if $detective_hat and $detective_magnifying_glass and $detective_pipe and $detective_trench_coat&gt;&gt;
+/% Other %/</tw-passagedata><tw-passagedata pid="41" name="DetectiveEquipment" tags="" position="100,600" size="100,100">&lt;&lt;if $detective_hat and $detective_magnifying_glass and $detective_pipe and $detective_trench_coat&gt;&gt;
     &lt;strong&gt;I have everything I need to be a detective. I am...the &lt;em&gt;determined detective&lt;/em&gt;!&lt;/strong&gt;
     &lt;&lt;advance &quot;$detective&quot; &quot;determined_detective&quot;&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
@@ -323,7 +338,14 @@ Determined detective stories
     Break Room: Cookie crumbs
     Conference Room: suspicious coat
     Lab: tbd
-%/</tw-passagedata><tw-passagedata pid="37" name="TinyQBN Widgets" tags="widget" position="850,475" size="100,100">/*
+
+You can interrogate people about the clues
+    Who hid the cookies? (Grumpy Granny; she then forgot about them)
+    Who left the muddy footprints in the security office and why? (Ninja Boy using a twin&#39;s shoes as a &quot;distraction&quot;)
+    Who left the cookie crumbs? (Grumpy Granny)
+    Who owned the coat? (Science Boy; couldn&#39;t wear the lab coat over his regular coat; left it on a skeleton)
+    Tbd
+%/</tw-passagedata><tw-passagedata pid="42" name="TinyQBN Widgets" tags="widget" position="225,600" size="100,100">/*
  * Comma-separated lists: call with &quot;linkto&quot; for links instead
  * of contents.
  */
