@@ -59,7 +59,7 @@ An elderly lady is searching through cabinets. "There must be something around h
 \
 /% Grumpy Granny %/\
 ::GrumpyGrannyIsGrumpy [sticky-card req-grumpy_granny req-not-choice]
-"What are you doing here? Get out of here you runt" says an old lady.\
+"What are you doing here? Get out of here you runt!" says an old lady.\
 \
 /% Any %/\
 ::CanIBeADetective [card important req-cookie_clues-during-quest req-not-choice]
