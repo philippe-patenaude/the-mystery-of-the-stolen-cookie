@@ -1,9 +1,9 @@
 ::Hub
 !Where would you like to go?
 [[Lobby->Lobby]]
-[[Security Office->SecurityOffice]]
-[[Break Room->BreakRoom]]
-[[Conference Room->ConferenceRoom]]
+[[Security office->SecurityOffice]]
+[[Break room->BreakRoom]]
+[[Conference room->ConferenceRoom]]
 [[Lab->Lab]]
 
 ::Lobby
@@ -19,7 +19,7 @@
 [[Go somewhere else -> Hub]]
 
 ::SecurityOffice
-!Security Office
+!Security office
 <<nobr>>
 <<set $location to "security_office">>
 <<include PeopleStories>>
@@ -31,7 +31,7 @@
 [[Go somewhere else -> Hub]]
 
 ::BreakRoom
-!Break Room
+!Break room
 <<nobr>>
 <<set $location to "break_room">>
 <<include PeopleStories>>
@@ -43,7 +43,7 @@
 [[Go somewhere else -> Hub]]
 
 ::ConferenceRoom
-!Conference Room
+!Conference room
 <<nobr>>
 <<set $location to "conference_room">>
 <<include PeopleStories>>

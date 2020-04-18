@@ -3,7 +3,7 @@
 A loud beep causes you to jump.\
 \
 ::SecurityOfficerLadyMurmurs [sticky-card req-security_officer_lady req-security_office req-not-choice]
-You hear some murmuring in the back of the office "Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?".\
+You hear some murmuring in the back of the office. "Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?"\
 \
 ::SecurityOfficerLady [card req-security_officer_lady req-security_office req-not-choice urgent]
 <<nobr>>
@@ -27,17 +27,17 @@ You look at the empty couches. It's so boring here.\
 \
 /% Ninja Boy %/\
 ::NinjaBoySwordSwing [sticky-card req-ninja_boy req-not-choice]
-A child swings an imaginary sword and whispers dramatically "I'm one with the shadows. Whoosh whoosh".\
+A child swings an imaginary sword and whispers dramatically "I'm one with the shadows. Whoosh whoosh."\
 \
 ::NinjaBoyDiscussesCuteGirls [sticky-card req-ninja_boy req-not-choice]
-A child does a dramatic Ninja pose. He then says "Those cute twins couldn't resist this"!\
+A child does a dramatic Ninja pose. He then says "Those cute twins couldn't resist this!"\
 \
 /% Twins %/\
 ::JoanAndJonahComplain [sticky-card req-joan req-jonah req-not-choice]
-A girl with a pink bow says "I can't believe how mean the security lady is". A girl with a red bow replies "Yeah. Even the grumpy granny is nicer than she is".\
+A girl with a pink bow says "I can't believe how mean the security lady is." A girl with a red bow replies "Yeah. Even the grumpy granny is nicer than she is."\
 \
 ::JoanAndJonahDiscussBoys [sticky-card req-joan req-jonah req-not-choice]
-A girl with a pink bow says "That little Ninja Boy is kind of cute". A girl with a red bow replies "But he's dumb. I like that little Science Boy better".\
+A girl with a pink bow says "That little Ninja Boy is kind of cute." A girl with a red bow replies "But he's dumb. I like that little Science Boy better."\
 \
 /% Lab %/\
 ::ScienceBoyInTheLab [sticky-card req-science_boy req-lab req-not-choice]
@@ -63,7 +63,7 @@ An elderly lady is searching through cabinets. "There must be something around h
 \
 /% Any %/\
 ::CanIBeADetective [card important req-cookie_clues-during-quest req-not-choice]
-I just had a brilliant idea! I could could dress up like a detective and hunt for clues!
+I just had a brilliant idea! I could dress up like a detective and hunt for clues!
 I would need:
 * A detective's hat
 * A trench coat
@@ -78,7 +78,7 @@ I would need:
 
 [[Yikes!->Hub]]
 \
-::Ask the twins "Who's who"? [card req-choice req-joan req-jonah]
+::Ask the twins "Who's who?" [card req-choice req-joan req-jonah]
 "We feel so insulted" said the girl with the pink bow. "We're never talking to you again" said the girl with the red bow.
 
 [[That's too bad.->Hub]]
@@ -171,7 +171,13 @@ Telling the twins apart
     One of the twins will ask you who she is. After you tell her, she will say you are wrong. You have to double down on saying who she is. If you do (and get it right), then you will get 1 reputation with each of the twins.
 
 Jonah's (red bow) love potion (requires 1 reputation with Jonah)
-    Jonah gets you to ask Science Boy to create a love potion. Once he creates the love potion, then you will give it to Jonah. Jonah will get you to secretly give it to him. Once Science Boy drinks the "love potion", he gets sick.
+    Jonah gets you to ask Science Boy to create a love potion. Once he creates the love potion, then you will give it to Jonah. Jonah will get you to secretly give it to him. Once Science Boy drinks the "love potion," he gets sick.
+
+Add an option for the twins that doesn't make them angry and lets the player know which twin is which.
+
+Can have the security officer lock the doors for a different reason than a cookie being stolen.
+
+Can have mutually exclusive story lines. These can help with replayability.
 
 Granny lure
     Mess with something that Granny has such as food or a coat.
