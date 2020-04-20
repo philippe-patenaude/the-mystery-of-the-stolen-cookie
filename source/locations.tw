@@ -12,9 +12,6 @@
 <<set $location to "lobby">>
 <<include PeopleStories>>
 <</nobr>>\
-<<nobr>>
-<<include StoryChoices>>
-<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -23,9 +20,6 @@
 <<nobr>>
 <<set $location to "security_office">>
 <<include PeopleStories>>
-<</nobr>>\
-<<nobr>>
-<<include StoryChoices>>
 <</nobr>>\
 
 [[Go somewhere else -> Hub]]
@@ -36,9 +30,6 @@
 <<set $location to "break_room">>
 <<include PeopleStories>>
 <</nobr>>\
-<<nobr>>
-<<include StoryChoices>>
-<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -48,9 +39,6 @@
 <<set $location to "conference_room">>
 <<include PeopleStories>>
 <</nobr>>\
-<<nobr>>
-<<include StoryChoices>>
-<</nobr>>\
 
 [[Go somewhere else -> Hub]]
 
@@ -59,9 +47,6 @@
 <<nobr>>
 <<set $location to "lab">>
 <<include PeopleStories>>
-<</nobr>>\
-<<nobr>>
-<<include StoryChoices>>
 <</nobr>>\
 
 [[Go somewhere else -> Hub]]
@@ -81,21 +66,14 @@
     <<if _saying.length>>
         <<includeall _saying>>
     <</if>>
+    /% Insert choices %/
+    <<set _choice to true>>
+    <<cardcolumn `QBN.cards().sort(QBN.alphabetically)` "linkbox">>
+    <<unset _choice>>
     /% Clean up the temporary variables for characters that are in the same room as the player. %/
     <<for _i to 0; _i < _names.length; _i++>>
         <<print "<<unset " + _name + ">>\\">>
     <</for>>
-    /% Clean up the location temporary variable. %/
-    <<print "<<unset _" + $location + ">>\\">>
-    <</nobr>>
-
-::StoryChoices
-    <<nobr>>
-    /% Set the location. %/
-    <<print "<<set _" + $location + " to true>>\\">>
-    <<set _choice to true>>
-    <<cardcolumn `QBN.cards().sort(QBN.alphabetically)` "linkbox">>
-    <<unset _choice>>
     /% Clean up the location temporary variable. %/
     <<print "<<unset _" + $location + ">>\\">>
     <</nobr>>

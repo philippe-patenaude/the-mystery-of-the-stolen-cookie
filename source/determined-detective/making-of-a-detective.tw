@@ -11,19 +11,19 @@ I would need:
 ::Search the lobby for detective outfits [card important req-choice req-lobby req-detective-during-making_of_a_detective]
 After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
 <<set $detective_pipe to true>>\
-<<include DetectiveEquipment>>\
+<<include DetectiveEquipment>>
 [[Eek!->Hub]]
 \
 ::Search the security office for detective outfits [card important req-choice req-security_office req-detective-during-making_of_a_detective]
 You found a dusty detective's hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
 <<set $detective_hat to true>>\
-<<include DetectiveEquipment>>\
+<<include DetectiveEquipment>>
 [[Woo hoo!->Hub]]
 \
 ::Search the break room for detective outfits [card important req-choice req-break_room req-detective-during-making_of_a_detective]
 In the first cabinet you open, you find a pristine trench coat folded up nicely. It's in your size as well. Sweet!
 <<set $detective_trench_coat to true>>\
-<<include DetectiveEquipment>>\
+<<include DetectiveEquipment>>
 [[Woo hoo!->Hub]]
 \
 ::Search the conference room for detective outfits [card important req-choice req-conference_room req-detective-during-making_of_a_detective]
@@ -34,7 +34,7 @@ You search the conference room top to bottom left to right. You only find skelet
 ::Search the lab for detective outfits [card important req-choice req-lab req-detective-during-making_of_a_detective]
 You look on every pile of junk then look through every drawer. In the end, you found a magnifying glass in the trash can! You wipe the mayonnaise off and stick it in your pocket.
 <<set $detective_magnifying_glass to true>>\
-<<include DetectiveEquipment>>\
+<<include DetectiveEquipment>>
 [[Woo hoo!->Hub]]
 
 /% Other %/

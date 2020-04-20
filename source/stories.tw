@@ -8,12 +8,11 @@ You hear some murmuring in the back of the office. "Should I have an oatmeal rai
 ::SecurityOfficerLady [card req-security_officer_lady req-security_office req-not-choice urgent]
 <<nobr>>
 Hey twerp. I'll make a deal with you. If you figure out who stole my cookie, I'll give you one of my favorite cookies! Now get out of here. Shoo.
-<<addcard SecurityOfficerLadyGivesReward sticky>>
 <<advance "$cookie_clues" "quest">>
 <</nobr>>\
 \
 /% Security Officer Lady %/\
-::SecurityOfficerLadyGivesReward [req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent]
+::Rat on the Grumpy Granny. [sticky-card req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-choice urgent]
 "You actually figured it out? Well, here's your reward." She opens a display case next to her desk and pulls out a cookie. "I've had this cookie since I was in high school. My crush gave it to me, so I couldn't part with it. I've moved on now, so it's all yours." Eww. "I've unlocked the doors. Now get out of here you twerp."
 
 [[Leave]]
@@ -53,7 +52,7 @@ A green smoke plume comes flowing out from behind one of the lab tables. It's be
 A small boy wearing an adult's lab coat says, without taking his eyes off of a bubbling purple liquid he is pouring, "Get out of here. You girls are in the way."\
 \
 /% Break Room %/\
-::GrumpyGrannyCaught [card req-grumpy_granny req-break_room req-cookie_clues-during-quest req-not-choice]
+::GrumpyGrannyCaught [card req-grumpy_granny req-break_room req-cookie_clues-during-quest req-detective_clue_cookie_crumbs req-not-choice]
 <<nobr>>
 You see an elderly lady quickly turn to hide her face. She clearly had crumbs all over her face...cookie crumbs!
 <<advance "$cookie_clues" "cookie_thief_discovered">>
