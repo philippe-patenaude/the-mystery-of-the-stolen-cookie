@@ -100,7 +100,7 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://DE4C5720-830B-452B-9B90-C9AC5DFF2E8C// --><tw-storydata name="The Mystery of the Stolen Cookie" startnode="10" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="DE4C5720-830B-452B-9B90-C9AC5DFF2E8C" zoom="1" format="SugarCube" format-version="2.30.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.qbn-card {
+	<!-- UUID://DE4C5720-830B-452B-9B90-C9AC5DFF2E8C// --><tw-storydata name="The Mystery of the Stolen Cookie" startnode="22" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="DE4C5720-830B-452B-9B90-C9AC5DFF2E8C" zoom="1" format="SugarCube" format-version="2.30.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.qbn-card {
     background: #222;
     border: thin solid #333;
     margin: 0.25em;
@@ -116,12 +116,57 @@ Permission to use, copy, modify, and/or distribute this software for any purpose
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
-State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.getValue,setVar=State.setVar||Wikifier.setValue;setVar("$QBN",{type:{},priority:{}}),$(document).on(":passagestart",function(a){QBN.current=a.passage.title,passageType(a.passage,!1)});function toArgument(a){if("object"==typeof a&&(a=a.title),"string"==typeof a)return JSON.stringify(a);throw new Error("Cards must be referred to by title (got "+typeof a+").")}function toPassage(a){if("object"==typeof a)if(a.link&&a.text)a=a.link;else return a;if("string"!=typeof a)throw new Error("Cards must be referred to by title (got "+typeof a+").");else{if(Story.has(a))return Story.get(a);let b=JSON.parse(a),c=b[0],d=b[1],e=b[2];if(passage()===c){let a=getVar(d);if(null!=a&&null!=a[e])return a[e]}throw new Error("No such passage or choice \""+a+"\".")}}function passageType(a,b){var c=0<=a.tags.indexOf("sticky-card")?"sticky-card":!!(0<=a.tags.indexOf("card"))&&"card";var d=getVar("$QBN").type,e=d[a.title];return void 0===e&&(e=c),void 0!==b&&b!==e&&(null===b?d[a.title]=!1:!1===b?"card"===e&&(d[a.title]=!1):b===c?delete d[a.title]:d[a.title]=b),e}function shuffle(b){for(let a=b.length;0<a;){let c,d=Math.floor(a--*Math.random());c=b[a],b[a]=b[d],b[d]=c}return b}QBN.alphabetically=function(c,d){if(null==c||null==d){let a="QBN.alphabetically seems to be missing an argument.";throw a+=" If you wrote .sort(QBN.alphabetically()) you'll want to",a+=" remove the empty set of parentheses so you're passing the",a+=" function itself, not calling it and passing its return value.",new Error(a)}return c=toPassage(c).title.toLowerCase(),d=toPassage(d).title.toLowerCase(),c<d?-1:c>d?1:0};function choose(a,b){var c=Math.min;if(null==b||!1===b)return shuffle(a);b=Math.max(0,c(b,a.length));for(var d=c(b,a.length-b),e=d==b,f=[],g={},h=0;h<d;){var j=Math.floor(State.random()*a.length);g[j]===void 0&&(e&&f.push(a[j]),g[j]=!0,++h)}if(!e){for(j=0;j<a.length;++j)!0!==g[j]&&f.push(a[j]);shuffle(f)}return f}function passagePriority(a,b){var c=0<=a.tags.indexOf("urgent")?"urgent":0<=a.tags.indexOf("important")?"important":"normal";var d=getVar("$QBN").priority,e=d[a.title];return void 0===e&&(e=c),void 0!==b&&b!==e&&(b===c?delete d[a.title]:d[a.title]=b),e}Macro.add("cardpriority",{handler:function(){var a=toPassage(this.args[0]);passagePriority(a,this.args[1])}});function select(a,b){let c={};a(function(a){if(a=toPassage(a),QBN.visible(a)){let b=passagePriority(a);c[b]||(c[b]=[]),c[b].push(a)}return!1});let d;c.urgent?d=choose(c.urgent,b):(c.important?(d=choose(c.important,b),b&&(b-=d.length)):d=[],c.normal&&(d=d.concat(choose(c.normal,b))));for(var e=0;e<d.length;++e)d[e]=d[e].title;return d}QBN.filter=function(a,b){let c=a.filter.bind(a);return select(c,b)},QBN.cards=function(a){let b=Story.lookupWith.bind(Story);return select(b,a)};var operators={eq:function(c,a){return c==a},ne:function(c,a){return c!=a},lt:function(c,a){return c<a},gt:function(c,a){return c>a},le:function(c,a){return c<=a},ge:function(c,a){return c>=a},before:function(c,a,b){return QBN.progress(b,c)<QBN.progress(b,a)},during:function(c,a,b){return QBN.progress(b,c)===QBN.progress(b,a)},after:function(c,a,b){return QBN.progress(b,c)>QBN.progress(b,a)}},operatorNames={eq:"to be",ne:"not to be",lt:"to be less than",le:"to be at most",gt:"to be greater than",ge:"to be at least"};QBN.functions={not:{match:/^not-(.+)/,action:function(a){return!QBN.requirementMet(a[1])},description:function(a){var b=QBN.description(a[1]);return null==b?b:"not "+b}},random:{match:/^random-([0-9]+)/,action:function(a){return State.random()<a[1]/100},description:function(){return null}},compare:{match:/^(.*)-(eq|ne|lt|gt|le|ge|before|during|after)-(.*)/,action:function(a){var b=QBN.value(a[1]),c=operators[a[2]],d=a[3];return"number"==typeof b&&(d=d.replace("_",".")),c(b,d,a[1])},description:function(a){var b=QBN.description(a[1]),c=operatorNames[a[2]],d=a[3];return"number"==typeof b&&(d=+d.replace("_",".")),null==b||null==c?null:`${b} ${c} ${d}`}}};function invalidName(a){if(!/^[$_][_a-zA-Z][_a-zA-Z0-9]*$/.test(a))return"invalid name "+JSON.stringify(a)+"."}QBN.range=function(a,b){var c=b.length;if("number"!=typeof c||2>c){var d="QBN.range: invalid range spec:";throw d+=" must have at least two values",d+=" (got "+JSON.stringify(c)+").",new Error(d)}for(var e,f,g,h,j=0;j<b.length;++j){if(h=b[j],"string"==typeof h&&"string"==typeof g){var d="QBN.range: invalid range spec "+JSON.stringify(b);throw d+=": may not have two consecutive strings.",new Error(d)}if(g=h,"string"==typeof h)e=h;else if("number"==typeof h){if("undefined"!=typeof f&&h<=f){var d="QBN.range: invalid range spec "+JSON.stringify(b);throw d+=": numbers must be strictly increasing.",new Error(d)}if(a<h)if(e)break;else return;f=h,e=void 0}else{var d="QBN.range: invalid range spec "+JSON.stringify(b);throw d+=": may only contain strings and numbers.",new Error(d)}}return e},Macro.add("range",{handler:function(){var a;try{a=QBN.range(this.args[0],this.args.slice(1))}catch(a){return this.error("<<range>>: "+(a.message||a))}var b=firstWord(this.args.raw);setVar("_"+a+"_"+b.substring(1),!0),setVar("_"+b.substring(1)+"_range",a)}}),QBN.value=function(a){var b=State.variables,c=State.temporary;return null==c[a]?b[a]:c[a]},QBN.requirementMet=function(a){var b=null;for(var c in QBN.functions)if(QBN.functions.hasOwnProperty(c)){var d=QBN.functions[c],e=d.match.exec(a);if(e){b=d.action(e);break}}return null===b&&(b=QBN.value(a)),!!b},QBN.description=function(a){var b=null;for(var c in QBN.functions)if(QBN.functions.hasOwnProperty(c)){var d=QBN.functions[c],e=d.match.exec(a);if(e){b=d.description(e);break}}return null===b&&(b=a),b},QBN.tagsMatch=function(a,b){a=toPassage(a);for(var c=0;c<a.tags.length;++c){var d=a.tags[c],e=b.exec(d);if(e)d=d.substring(e[0].length);else continue;if(!QBN.requirementMet(d))return!1}return!0},QBN.requirements=function(a){for(var b=/^(req|also)-/,c=[],d=0;d<a.tags.length;++d){var e=a.tags[d],f=b.exec(e);if(f)e=e.substring(f[0].length);else continue;var g=QBN.description(e);null!=g&&c.push(g)}return c},QBN.status=function(a){return passageType(toPassage(a))},QBN.visible=function(a){return a=toPassage(a),!!passageType(a)&&QBN.tagsMatch(a,/^req-/)},QBN.available=function(a){return a=toPassage(a),!!passageType(a)&&QBN.tagsMatch(a,/^(req|also)-/)},Macro.add("addcard",{handler:function(){var a=toPassage(this.args[0]),b=this.args[1]?"sticky-card":"card";passageType(a,b)}}),Macro.add("removecard",{handler:function(){var a=toPassage(this.args[0]),b=!1!==this.args[1]&&null;passageType(a,b)}}),Macro.add("includecard",{handler:function(){var a=toPassage(this.args[0]),b=$(this.output);let c=QBN.current;QBN.current=a.title,b.wiki(Passage.prototype.processText.call(a)),QBN.current=c}});function list(a){return"object"!=typeof a||null==a.length?[a]:a}Macro.add("includeall",{handler:function(){var a=list(this.args[0]),b=this.args[1]||"content";if(!Macro.has(b))return this.error("No such widget "+JSON.stringify(b)+".");for(var d=this.args[2],e=$(this.output),f=0;f<a.length;++f){var g=a[f],c=toPassage(g);e.wiki("<<"+b+" "+toArgument(g)+">>"),d&&f<a.length-1&&(Macro.has(d)?e.wiki("<<"+d+" "+(f==a.length-2)+">>"):e.append(document.createTextNode(d)))}}}),Macro.add("requirements",{handler:function(){var a=$(this.output),b=toPassage(this.args[0]||QBN.current),c=this.args[1];if(c&&!Macro.has(c))return this.error("No such widget "+JSON.stringify(c)+".");for(var d,e=this.args[2]||"comma",f=QBN.requirements(b),g=0;g<f.length;++g)d=f[g],c?a.wiki("<<"+c+" "+JSON.stringify(d)+">>"):a.wiki(d),e&&g<f.length-1&&(Macro.has(e)?a.wiki("<<"+e+" "+(g==f.length-2)+">>"):a.append(document.createTextNode(e)))}});function addTo(a,b){var c="string"==typeof b?b:b.title,d=!a[c];return d&&(a[c]=!0),d}function firstWord(a){var b=a.indexOf(" ");return a.substring(0,-1==b?a.length:b)}Macro.add("fillhand",{handler:function(){try{var a=this.args[0],b=this.args[1],c=this.args[2];if(!a){a=[];var d=firstWord(this.args.raw).substring(1);if(!setVar(d,a))return this.error("<<fillhand>>: failed to set hand \""+d+"\".")}var e,f={};for(e=0;e<a.length;++e)addTo(f,a[e]);for(c=c.filter(function(a){return addTo(f,a)}),c=choose(c,b-a.length),e=0;e<c.length;++e)a.push(c[e])}catch(a){return this.error("<<fillhand>>: "+("object"==typeof a?a.message:a))}}}),Macro.add("card",{tags:["contents"],handler:function(){var a=$(this.output);if(getVar("_qbn_cover"))a.wiki(this.payload[0].contents);else for(var b=1;b<this.payload.length;++b)a.wiki(this.payload[b].contents)}});function partialChoice(a){return 0<a.length&&null==a[a.length-1].text}function beginChoice(a,b,c){0>c.indexOf("card")&&0>c.indexOf("sticky-card")&&c.push("card"),a.push({title:JSON.stringify([passage(),b,a.length]),tags:c})}Macro.add("choices",{tags:["when","offer"],handler:function(){var a=this.args.raw,b=invalidName(a);if(b)return this.error(b);for(var c=[],d=0;d<this.payload.length;++d){var e=this.payload[d],b=!1;switch(e.name){case"choices":if(""!==e.contents.trim())return this.error("All <<choices>> content must be in sub-tags.");break;case"when":if(partialChoice(c))return this.error("This choice already has a \"when\" clause (section "+d+", "+e.name+").");var f=e.contents.trim();f=""===f?[]:f.split(/\s+/),beginChoice(c,a,f);break;case"offer":partialChoice(c)||beginChoice(c,a,[]),c[c.length-1].text=e.contents.trim(),""!==e.args[0]&&(c[e.args[0]]=c[c.length-1]);}}setVar(a,c)}}),QBN.progress=function(a,b){a=a.replace(/^[$_]/,"");let c=setup[a];if(null==c)throw"No such progress sequence "+JSON.stringify(a)+".";let d=c.indexOf(b);if(-1===d)throw"No such progress value "+JSON.stringify(b)+" in "+JSON.stringify(a)+".";return d},Macro.add("progress",{handler:function(){const a=this.args[0];let b=invalidName(a);if(b)return this.err(b);let c=[];setup[a.replace(/^[$_]/,"")]=c;for(let a=1;a<this.args.length;++a)c.push(this.args[a]);setVar(a,c[0])}}),Macro.add("advance",{handler:function(){const a=this.args[0];let b=invalidName(a);if(b)return this.err(b);const c=+this.args[1]||1;let d=setup[a.replace(/^[$_]/,"")],e=getVar(a),f=QBN.progress(a,e)+c;f=Math.max(0,Math.min(f,d.length-1)),setVar(a,d[f])}});</script><tw-passagedata pid="1" name="Hub" tags="" position="100,100" size="100,100">!Where would you like to go?
+State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.getValue,setVar=State.setVar||Wikifier.setValue;setVar("$QBN",{type:{},priority:{}}),$(document).on(":passagestart",function(a){QBN.current=a.passage.title,passageType(a.passage,!1)});function toArgument(a){if("object"==typeof a&&(a=a.title),"string"==typeof a)return JSON.stringify(a);throw new Error("Cards must be referred to by title (got "+typeof a+").")}function toPassage(a){if("object"==typeof a)if(a.link&&a.text)a=a.link;else return a;if("string"!=typeof a)throw new Error("Cards must be referred to by title (got "+typeof a+").");else{if(Story.has(a))return Story.get(a);let b=JSON.parse(a),c=b[0],d=b[1],e=b[2];if(passage()===c){let a=getVar(d);if(null!=a&&null!=a[e])return a[e]}throw new Error("No such passage or choice \""+a+"\".")}}function passageType(a,b){var c=0<=a.tags.indexOf("sticky-card")?"sticky-card":!!(0<=a.tags.indexOf("card"))&&"card";var d=getVar("$QBN").type,e=d[a.title];return void 0===e&&(e=c),void 0!==b&&b!==e&&(null===b?d[a.title]=!1:!1===b?"card"===e&&(d[a.title]=!1):b===c?delete d[a.title]:d[a.title]=b),e}function shuffle(b){for(let a=b.length;0<a;){let c,d=Math.floor(a--*Math.random());c=b[a],b[a]=b[d],b[d]=c}return b}QBN.alphabetically=function(c,d){if(null==c||null==d){let a="QBN.alphabetically seems to be missing an argument.";throw a+=" If you wrote .sort(QBN.alphabetically()) you'll want to",a+=" remove the empty set of parentheses so you're passing the",a+=" function itself, not calling it and passing its return value.",new Error(a)}return c=toPassage(c).title.toLowerCase(),d=toPassage(d).title.toLowerCase(),c<d?-1:c>d?1:0};function choose(a,b){var c=Math.min;if(null==b||!1===b)return shuffle(a);b=Math.max(0,c(b,a.length));for(var d=c(b,a.length-b),e=d==b,f=[],g={},h=0;h<d;){var j=Math.floor(State.random()*a.length);g[j]===void 0&&(e&&f.push(a[j]),g[j]=!0,++h)}if(!e){for(j=0;j<a.length;++j)!0!==g[j]&&f.push(a[j]);shuffle(f)}return f}function passagePriority(a,b){var c=0<=a.tags.indexOf("urgent")?"urgent":0<=a.tags.indexOf("important")?"important":"normal";var d=getVar("$QBN").priority,e=d[a.title];return void 0===e&&(e=c),void 0!==b&&b!==e&&(b===c?delete d[a.title]:d[a.title]=b),e}Macro.add("cardpriority",{handler:function(){var a=toPassage(this.args[0]);passagePriority(a,this.args[1])}});function select(a,b){let c={};a(function(a){if(a=toPassage(a),QBN.visible(a)){let b=passagePriority(a);c[b]||(c[b]=[]),c[b].push(a)}return!1});let d;c.urgent?d=choose(c.urgent,b):(c.important?(d=choose(c.important,b),b&&(b-=d.length)):d=[],c.normal&&(d=d.concat(choose(c.normal,b))));for(var e=0;e<d.length;++e)d[e]=d[e].title;return d}QBN.filter=function(a,b){let c=a.filter.bind(a);return select(c,b)},QBN.cards=function(a){let b=Story.lookupWith.bind(Story);return select(b,a)};var operators={eq:function(c,a){return c==a},ne:function(c,a){return c!=a},lt:function(c,a){return c<a},gt:function(c,a){return c>a},le:function(c,a){return c<=a},ge:function(c,a){return c>=a},before:function(c,a,b){return QBN.progress(b,c)<QBN.progress(b,a)},during:function(c,a,b){return QBN.progress(b,c)===QBN.progress(b,a)},after:function(c,a,b){return QBN.progress(b,c)>QBN.progress(b,a)}},operatorNames={eq:"to be",ne:"not to be",lt:"to be less than",le:"to be at most",gt:"to be greater than",ge:"to be at least"};QBN.functions={not:{match:/^not-(.+)/,action:function(a){return!QBN.requirementMet(a[1])},description:function(a){var b=QBN.description(a[1]);return null==b?b:"not "+b}},random:{match:/^random-([0-9]+)/,action:function(a){return State.random()<a[1]/100},description:function(){return null}},compare:{match:/^(.*)-(eq|ne|lt|gt|le|ge|before|during|after)-(.*)/,action:function(a){var b=QBN.value(a[1]),c=operators[a[2]],d=a[3];return"number"==typeof b&&(d=d.replace("_",".")),c(b,d,a[1])},description:function(a){var b=QBN.description(a[1]),c=operatorNames[a[2]],d=a[3];return"number"==typeof b&&(d=+d.replace("_",".")),null==b||null==c?null:`${b} ${c} ${d}`}}};function invalidName(a){if(!/^[$_][_a-zA-Z][_a-zA-Z0-9]*$/.test(a))return"invalid name "+JSON.stringify(a)+"."}QBN.range=function(a,b){var c=b.length;if("number"!=typeof c||2>c){var d="QBN.range: invalid range spec:";throw d+=" must have at least two values",d+=" (got "+JSON.stringify(c)+").",new Error(d)}for(var e,f,g,h,j=0;j<b.length;++j){if(h=b[j],"string"==typeof h&&"string"==typeof g){var d="QBN.range: invalid range spec "+JSON.stringify(b);throw d+=": may not have two consecutive strings.",new Error(d)}if(g=h,"string"==typeof h)e=h;else if("number"==typeof h){if("undefined"!=typeof f&&h<=f){var d="QBN.range: invalid range spec "+JSON.stringify(b);throw d+=": numbers must be strictly increasing.",new Error(d)}if(a<h)if(e)break;else return;f=h,e=void 0}else{var d="QBN.range: invalid range spec "+JSON.stringify(b);throw d+=": may only contain strings and numbers.",new Error(d)}}return e},Macro.add("range",{handler:function(){var a;try{a=QBN.range(this.args[0],this.args.slice(1))}catch(a){return this.error("<<range>>: "+(a.message||a))}var b=firstWord(this.args.raw);setVar("_"+a+"_"+b.substring(1),!0),setVar("_"+b.substring(1)+"_range",a)}}),QBN.value=function(a){var b=State.variables,c=State.temporary;return null==c[a]?b[a]:c[a]},QBN.requirementMet=function(a){var b=null;for(var c in QBN.functions)if(QBN.functions.hasOwnProperty(c)){var d=QBN.functions[c],e=d.match.exec(a);if(e){b=d.action(e);break}}return null===b&&(b=QBN.value(a)),!!b},QBN.description=function(a){var b=null;for(var c in QBN.functions)if(QBN.functions.hasOwnProperty(c)){var d=QBN.functions[c],e=d.match.exec(a);if(e){b=d.description(e);break}}return null===b&&(b=a),b},QBN.tagsMatch=function(a,b){a=toPassage(a);for(var c=0;c<a.tags.length;++c){var d=a.tags[c],e=b.exec(d);if(e)d=d.substring(e[0].length);else continue;if(!QBN.requirementMet(d))return!1}return!0},QBN.requirements=function(a){for(var b=/^(req|also)-/,c=[],d=0;d<a.tags.length;++d){var e=a.tags[d],f=b.exec(e);if(f)e=e.substring(f[0].length);else continue;var g=QBN.description(e);null!=g&&c.push(g)}return c},QBN.status=function(a){return passageType(toPassage(a))},QBN.visible=function(a){return a=toPassage(a),!!passageType(a)&&QBN.tagsMatch(a,/^req-/)},QBN.available=function(a){return a=toPassage(a),!!passageType(a)&&QBN.tagsMatch(a,/^(req|also)-/)},Macro.add("addcard",{handler:function(){var a=toPassage(this.args[0]),b=this.args[1]?"sticky-card":"card";passageType(a,b)}}),Macro.add("removecard",{handler:function(){var a=toPassage(this.args[0]),b=!1!==this.args[1]&&null;passageType(a,b)}}),Macro.add("includecard",{handler:function(){var a=toPassage(this.args[0]),b=$(this.output);let c=QBN.current;QBN.current=a.title,b.wiki(Passage.prototype.processText.call(a)),QBN.current=c}});function list(a){return"object"!=typeof a||null==a.length?[a]:a}Macro.add("includeall",{handler:function(){var a=list(this.args[0]),b=this.args[1]||"content";if(!Macro.has(b))return this.error("No such widget "+JSON.stringify(b)+".");for(var d=this.args[2],e=$(this.output),f=0;f<a.length;++f){var g=a[f],c=toPassage(g);e.wiki("<<"+b+" "+toArgument(g)+">>"),d&&f<a.length-1&&(Macro.has(d)?e.wiki("<<"+d+" "+(f==a.length-2)+">>"):e.append(document.createTextNode(d)))}}}),Macro.add("requirements",{handler:function(){var a=$(this.output),b=toPassage(this.args[0]||QBN.current),c=this.args[1];if(c&&!Macro.has(c))return this.error("No such widget "+JSON.stringify(c)+".");for(var d,e=this.args[2]||"comma",f=QBN.requirements(b),g=0;g<f.length;++g)d=f[g],c?a.wiki("<<"+c+" "+JSON.stringify(d)+">>"):a.wiki(d),e&&g<f.length-1&&(Macro.has(e)?a.wiki("<<"+e+" "+(g==f.length-2)+">>"):a.append(document.createTextNode(e)))}});function addTo(a,b){var c="string"==typeof b?b:b.title,d=!a[c];return d&&(a[c]=!0),d}function firstWord(a){var b=a.indexOf(" ");return a.substring(0,-1==b?a.length:b)}Macro.add("fillhand",{handler:function(){try{var a=this.args[0],b=this.args[1],c=this.args[2];if(!a){a=[];var d=firstWord(this.args.raw).substring(1);if(!setVar(d,a))return this.error("<<fillhand>>: failed to set hand \""+d+"\".")}var e,f={};for(e=0;e<a.length;++e)addTo(f,a[e]);for(c=c.filter(function(a){return addTo(f,a)}),c=choose(c,b-a.length),e=0;e<c.length;++e)a.push(c[e])}catch(a){return this.error("<<fillhand>>: "+("object"==typeof a?a.message:a))}}}),Macro.add("card",{tags:["contents"],handler:function(){var a=$(this.output);if(getVar("_qbn_cover"))a.wiki(this.payload[0].contents);else for(var b=1;b<this.payload.length;++b)a.wiki(this.payload[b].contents)}});function partialChoice(a){return 0<a.length&&null==a[a.length-1].text}function beginChoice(a,b,c){0>c.indexOf("card")&&0>c.indexOf("sticky-card")&&c.push("card"),a.push({title:JSON.stringify([passage(),b,a.length]),tags:c})}Macro.add("choices",{tags:["when","offer"],handler:function(){var a=this.args.raw,b=invalidName(a);if(b)return this.error(b);for(var c=[],d=0;d<this.payload.length;++d){var e=this.payload[d],b=!1;switch(e.name){case"choices":if(""!==e.contents.trim())return this.error("All <<choices>> content must be in sub-tags.");break;case"when":if(partialChoice(c))return this.error("This choice already has a \"when\" clause (section "+d+", "+e.name+").");var f=e.contents.trim();f=""===f?[]:f.split(/\s+/),beginChoice(c,a,f);break;case"offer":partialChoice(c)||beginChoice(c,a,[]),c[c.length-1].text=e.contents.trim(),""!==e.args[0]&&(c[e.args[0]]=c[c.length-1]);}}setVar(a,c)}}),QBN.progress=function(a,b){a=a.replace(/^[$_]/,"");let c=setup[a];if(null==c)throw"No such progress sequence "+JSON.stringify(a)+".";let d=c.indexOf(b);if(-1===d)throw"No such progress value "+JSON.stringify(b)+" in "+JSON.stringify(a)+".";return d},Macro.add("progress",{handler:function(){const a=this.args[0];let b=invalidName(a);if(b)return this.err(b);let c=[];setup[a.replace(/^[$_]/,"")]=c;for(let a=1;a<this.args.length;++a)c.push(this.args[a]);setVar(a,c[0])}}),Macro.add("advance",{handler:function(){const a=this.args[0];let b=invalidName(a);if(b)return this.err(b);const c=+this.args[1]||1;let d=setup[a.replace(/^[$_]/,"")],e=getVar(a),f=QBN.progress(a,e)+c;f=Math.max(0,Math.min(f,d.length-1)),setVar(a,d[f])}});</script><tw-passagedata pid="1" name="CanIBeADetective" tags="card important req-cookie_clues-during-quest req-not-choice" position="100,100" size="100,100">I just had a brilliant idea! I could dress up like a detective and hunt for clues!
+I would need:
+* A detective&#39;s hat
+* A trench coat
+* A magnifying glass
+* A pipe
+\
+&lt;&lt;advance &quot;$detective&quot; &quot;making_of_a_detective&quot;&gt;&gt;\
+\</tw-passagedata><tw-passagedata pid="2" name="Search the lobby for detective outfits" tags="card important req-choice req-lobby req-detective-during-making_of_a_detective" position="225,100" size="100,100">After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
+&lt;&lt;set $detective_pipe to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Eek!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="3" name="Search the security office for detective outfits" tags="card important req-choice req-security_office req-detective-during-making_of_a_detective" position="350,100" size="100,100">You found a dusty detective&#39;s hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
+&lt;&lt;set $detective_hat to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="4" name="Search the break room for detective outfits" tags="card important req-choice req-break_room req-detective-during-making_of_a_detective" position="475,100" size="100,100">In the first cabinet you open, you find a pristine trench coat folded up nicely. It&#39;s in your size as well. Sweet!
+&lt;&lt;set $detective_trench_coat to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="5" name="Search the conference room for detective outfits" tags="card important req-choice req-conference_room req-detective-during-making_of_a_detective" position="600,100" size="100,100">You search the conference room top to bottom left to right. You only find skeletons in the closet. Oh well.
+
+[[Gotta look elsewhere-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="6" name="Search the lab for detective outfits" tags="card important req-choice req-lab req-detective-during-making_of_a_detective" position="725,100" size="100,100">You look on every pile of junk then look through every drawer. In the end, you found a magnifying glass in the trash can! You wipe the mayonnaise off and stick it in your pocket.
+&lt;&lt;set $detective_magnifying_glass to true&gt;&gt;\
+&lt;&lt;include DetectiveEquipment&gt;&gt;\
+[[Woo hoo!-&gt;Hub]]
+
+/% Other %/</tw-passagedata><tw-passagedata pid="7" name="DetectiveEquipment" tags="" position="850,100" size="100,100">&lt;&lt;if $detective_hat and $detective_magnifying_glass and $detective_pipe and $detective_trench_coat&gt;&gt;
+    &lt;strong&gt;I have everything I need to be a detective. I am...the &lt;em&gt;determined detective&lt;/em&gt;!&lt;/strong&gt; Now it&#39;s time for me to search for clues.
+    &lt;&lt;advance &quot;$detective&quot; &quot;determined_detective&quot;&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="8" name="Search the lobby for clues" tags="card important req-choice req-lobby req-detective-during-determined_detective" position="975,100" size="100,100">You use your super genius detective deductive skills to find a pile of cookies stashed away under a couch cushion.
+
+[[They must be sampled!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="9" name="Search the security office for clues" tags="card important req-choice req-security_office req-detective-during-determined_detective" position="1100,100" size="100,100">You turn on your extreme cyber punk detective perception. You find muddy footprints leading out of the office. You make a cast of the footprints using toothpaste.
+
+[[Now to find the suspect!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="10" name="Search the break room clues" tags="card important req-choice req-break_room req-detective-during-determined_detective" position="1225,100" size="100,100">You take out the mayonnaise streaked magnifying glass and search every square inch of the donuts on the counter. After enjoying a donut, you then find cookie crumbs in the sink.
+
+[[It seems you found the scene of the crime!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="11" name="Search the conference room for clues" tags="card important req-choice req-conference_room req-detective-during-determined_detective" position="100,225" size="100,100">You turn on your detective x-ray vision and find a suspicious coat in the closet. It looks like it is big enough to hide cookies! You take the coat off of the skeleton and take it with you as evidence.
+
+[[The evidence is mounting!-&gt;Hub]]
+\</tw-passagedata><tw-passagedata pid="12" name="Search the lab for clues" tags="card important req-choice req-lab req-detective-during-determined_detective" position="225,225" size="100,100">You search the lab and find... a mysterious... thing.
+
+[[Yay! Now I have a thing!-&gt;Hub]]</tw-passagedata><tw-passagedata pid="13" name="Hub" tags="" position="350,225" size="100,100">!Where would you like to go?
 [[Lobby-&gt;Lobby]]
 [[Security office-&gt;SecurityOffice]]
 [[Break room-&gt;BreakRoom]]
 [[Conference room-&gt;ConferenceRoom]]
-[[Lab-&gt;Lab]]</tw-passagedata><tw-passagedata pid="2" name="Lobby" tags="" position="225,100" size="100,100">!Lobby
+[[Lab-&gt;Lab]]</tw-passagedata><tw-passagedata pid="14" name="Lobby" tags="" position="475,225" size="100,100">!Lobby
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $location to &quot;lobby&quot;&gt;&gt;
 &lt;&lt;include PeopleStories&gt;&gt;
@@ -130,7 +175,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
 &lt;&lt;include StoryChoices&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 
-[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="3" name="SecurityOffice" tags="" position="350,100" size="100,100">!Security office
+[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="15" name="SecurityOffice" tags="" position="600,225" size="100,100">!Security office
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $location to &quot;security_office&quot;&gt;&gt;
 &lt;&lt;include PeopleStories&gt;&gt;
@@ -139,7 +184,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
 &lt;&lt;include StoryChoices&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 
-[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="4" name="BreakRoom" tags="" position="475,100" size="100,100">!Break room
+[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="16" name="BreakRoom" tags="" position="725,225" size="100,100">!Break room
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $location to &quot;break_room&quot;&gt;&gt;
 &lt;&lt;include PeopleStories&gt;&gt;
@@ -148,7 +193,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
 &lt;&lt;include StoryChoices&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 
-[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="5" name="ConferenceRoom" tags="" position="600,100" size="100,100">!Conference room
+[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="17" name="ConferenceRoom" tags="" position="850,225" size="100,100">!Conference room
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $location to &quot;conference_room&quot;&gt;&gt;
 &lt;&lt;include PeopleStories&gt;&gt;
@@ -157,7 +202,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
 &lt;&lt;include StoryChoices&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 
-[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="6" name="Lab" tags="" position="725,100" size="100,100">!Lab
+[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="18" name="Lab" tags="" position="975,225" size="100,100">!Lab
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $location to &quot;lab&quot;&gt;&gt;
 &lt;&lt;include PeopleStories&gt;&gt;
@@ -166,7 +211,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
 &lt;&lt;include StoryChoices&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 
-[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="7" name="PeopleStories" tags="" position="850,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+[[Go somewhere else -&gt; Hub]]</tw-passagedata><tw-passagedata pid="19" name="PeopleStories" tags="" position="1100,225" size="100,100">&lt;&lt;nobr&gt;&gt;
     &lt;&lt;set _names to [&quot;_ninja_boy&quot;, &quot;_science_boy&quot;, &quot;_joan&quot;, &quot;_jonah&quot;, &quot;_grumpy_granny&quot;, &quot;_security_officer_lady&quot;]&gt;&gt;
     &lt;&lt;set _people to $places[$location].people&gt;&gt;
     /% Set the location. %/
@@ -186,7 +231,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
     &lt;&lt;/for&gt;&gt;
     /% Clean up the location temporary variable. %/
     &lt;&lt;print &quot;&lt;&lt;unset _&quot; + $location + &quot;&gt;&gt;\\&quot;&gt;&gt;
-    &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="StoryChoices" tags="" position="975,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+    &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="StoryChoices" tags="" position="1225,225" size="100,100">&lt;&lt;nobr&gt;&gt;
     /% Set the location. %/
     &lt;&lt;print &quot;&lt;&lt;set _&quot; + $location + &quot; to true&gt;&gt;\\&quot;&gt;&gt;
     &lt;&lt;set _choice to true&gt;&gt;
@@ -194,7 +239,7 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
     &lt;&lt;unset _choice&gt;&gt;
     /% Clean up the location temporary variable. %/
     &lt;&lt;print &quot;&lt;&lt;unset _&quot; + $location + &quot;&gt;&gt;\\&quot;&gt;&gt;
-    &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="StoryInit" tags="" position="1100,100" size="100,100">&lt;&lt;set $places to 
+    &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="StoryInit" tags="" position="100,350" size="100,100">&lt;&lt;set $places to 
 {
     &quot;lobby&quot;:{&quot;people&quot;:{&quot;_ninja_boy&quot;:true}},
     &quot;lab&quot;:{&quot;people&quot;:{&quot;_science_boy&quot;:true}},
@@ -204,102 +249,55 @@ State.initPRNG();var QBN={};window.QBN=QBN;var getVar=State.getVar||Wikifier.get
 }&gt;&gt;
 &lt;&lt;set $location to &quot;lobby&quot;&gt;&gt;
 &lt;&lt;progress &quot;$cookie_clues&quot; &quot;no_quest&quot; &quot;quest&quot; &quot;cookie_thief_discovered&quot;&gt;&gt;
-&lt;&lt;progress &quot;$detective&quot; &quot;normal_boy&quot; &quot;making_of_a_detective&quot; &quot;determined_detective&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Start" tags="" position="1225,100" size="100,100">!The stolen cookie
+&lt;&lt;progress &quot;$detective&quot; &quot;normal_boy&quot; &quot;making_of_a_detective&quot; &quot;determined_detective&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Start" tags="" position="225,350" size="100,100">!The stolen cookie
 The doors slam shut. A voice comes over the load speaker. &quot;I know one of you little twerps stole my cookie!&quot; said a female voice. &quot;None of you are leaving until you fess up,&quot; she said angrily.
 
-[[Next-&gt;Intro-1]]</tw-passagedata><tw-passagedata pid="11" name="Intro-1" tags="" position="100,225" size="100,100">!Realization
+[[Next-&gt;Intro-1]]</tw-passagedata><tw-passagedata pid="23" name="Intro-1" tags="" position="350,350" size="100,100">!Realization
 You and five others are standing in the lobby of a large company headquarters. The security officer has just locked all the doors. &quot;Look what you children have done now!&quot; said an elderly woman. &quot;We didn&#39;t,&quot; started a girl with a pink bow in her hair. &quot;Do anything,&quot; finished an identical twin girl with a red bow. The people leave the lobby and spread throughout the building.
 
-[[Next-&gt;Hub]]</tw-passagedata><tw-passagedata pid="12" name="GenericSecurityOffice" tags="sticky-card req-security_office req-not-choice" position="225,225" size="100,100">A loud beep causes you to jump.\
-\</tw-passagedata><tw-passagedata pid="13" name="SecurityOfficerLadyMurmurs" tags="sticky-card req-security_officer_lady req-security_office req-not-choice" position="350,225" size="100,100">You hear some murmuring in the back of the office. &quot;Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?&quot;\
-\</tw-passagedata><tw-passagedata pid="14" name="SecurityOfficerLady" tags="card req-security_officer_lady req-security_office req-not-choice urgent" position="475,225" size="100,100">&lt;&lt;nobr&gt;&gt;
+[[Next-&gt;Hub]]</tw-passagedata><tw-passagedata pid="24" name="GenericSecurityOffice" tags="sticky-card req-security_office req-not-choice" position="475,350" size="100,100">A loud beep causes you to jump.\
+\</tw-passagedata><tw-passagedata pid="25" name="SecurityOfficerLadyMurmurs" tags="sticky-card req-security_officer_lady req-security_office req-not-choice" position="600,350" size="100,100">You hear some murmuring in the back of the office. &quot;Should I have an oatmeal raisin or white chocolate macadamia nut cookie for supper?&quot;\
+\</tw-passagedata><tw-passagedata pid="26" name="SecurityOfficerLady" tags="card req-security_officer_lady req-security_office req-not-choice urgent" position="725,350" size="100,100">&lt;&lt;nobr&gt;&gt;
 Hey twerp. I&#39;ll make a deal with you. If you figure out who stole my cookie, I&#39;ll give you one of my favorite cookies! Now get out of here. Shoo.
 &lt;&lt;addcard SecurityOfficerLadyGivesReward sticky&gt;&gt;
 &lt;&lt;advance &quot;$cookie_clues&quot; &quot;quest&quot;&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
 \
-/% Security Officer Lady %/\</tw-passagedata><tw-passagedata pid="15" name="SecurityOfficerLadyGivesReward" tags="req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent" position="600,225" size="100,100">&quot;You actually figured it out? Well, here&#39;s your reward.&quot; She opens a display case next to her desk and pulls out a cookie. &quot;I&#39;ve had this cookie since I was in high school. My crush gave it to me, so I couldn&#39;t part with it. I&#39;ve moved on now, so it&#39;s all yours.&quot; Eww. &quot;I&#39;ve unlocked the doors. Now get out of here you twerp.&quot;
+/% Security Officer Lady %/\</tw-passagedata><tw-passagedata pid="27" name="SecurityOfficerLadyGivesReward" tags="req-security_officer_lady req-cookie_clues-during-cookie_thief_discovered req-not-choice urgent" position="850,350" size="100,100">&quot;You actually figured it out? Well, here&#39;s your reward.&quot; She opens a display case next to her desk and pulls out a cookie. &quot;I&#39;ve had this cookie since I was in high school. My crush gave it to me, so I couldn&#39;t part with it. I&#39;ve moved on now, so it&#39;s all yours.&quot; Eww. &quot;I&#39;ve unlocked the doors. Now get out of here you twerp.&quot;
 
 [[Leave]]
 \
-/% Lobby %/\</tw-passagedata><tw-passagedata pid="16" name="GenericLobby" tags="sticky-card req-lobby req-not-choice" position="725,225" size="100,100">You look at the empty couches. It&#39;s so boring here.\
-\</tw-passagedata><tw-passagedata pid="17" name="NinjaBoyLobbyAmbush" tags="sticky-card req-ninja_boy req-lobby req-not-choice" position="850,225" size="100,100">&quot;Hyaa!&quot; A child jumps out from behind the reception desk and stabs you in the back with an imaginary sword.\
+/% The end %/</tw-passagedata><tw-passagedata pid="28" name="Leave" tags="" position="975,350" size="100,100">!The mystery is solved!
+You gleefully leave the building.
 \
-/% Ninja Boy %/\</tw-passagedata><tw-passagedata pid="18" name="NinjaBoySwordSwing" tags="sticky-card req-ninja_boy req-not-choice" position="975,225" size="100,100">A child swings an imaginary sword and whispers dramatically &quot;I&#39;m one with the shadows. Whoosh whoosh.&quot;\
-\</tw-passagedata><tw-passagedata pid="19" name="NinjaBoyDiscussesCuteGirls" tags="sticky-card req-ninja_boy req-not-choice" position="1100,225" size="100,100">A child does a dramatic Ninja pose. He then says &quot;Those cute twins couldn&#39;t resist this!&quot;\
+/% Lobby %/\</tw-passagedata><tw-passagedata pid="29" name="GenericLobby" tags="sticky-card req-lobby req-not-choice" position="1100,350" size="100,100">You look at the empty couches. It&#39;s so boring here.\
+\</tw-passagedata><tw-passagedata pid="30" name="NinjaBoyLobbyAmbush" tags="sticky-card req-ninja_boy req-lobby req-not-choice" position="1225,350" size="100,100">&quot;Hyaa!&quot; A child jumps out from behind the reception desk and stabs you in the back with an imaginary sword.\
 \
-/% Twins %/\</tw-passagedata><tw-passagedata pid="20" name="JoanAndJonahComplain" tags="sticky-card req-joan req-jonah req-not-choice" position="1225,225" size="100,100">A girl with a pink bow says &quot;I can&#39;t believe how mean the security lady is.&quot; A girl with a red bow replies &quot;Yeah. Even the grumpy granny is nicer than she is.&quot;\
-\</tw-passagedata><tw-passagedata pid="21" name="JoanAndJonahDiscussBoys" tags="sticky-card req-joan req-jonah req-not-choice" position="100,350" size="100,100">A girl with a pink bow says &quot;That little Ninja Boy is kind of cute.&quot; A girl with a red bow replies &quot;But he&#39;s dumb. I like that little Science Boy better.&quot;\
+/% Ninja Boy %/\</tw-passagedata><tw-passagedata pid="31" name="NinjaBoySwordSwing" tags="sticky-card req-ninja_boy req-not-choice" position="100,475" size="100,100">A child swings an imaginary sword and whispers dramatically &quot;I&#39;m one with the shadows. Whoosh whoosh.&quot;\
+\</tw-passagedata><tw-passagedata pid="32" name="NinjaBoyDiscussesCuteGirls" tags="sticky-card req-ninja_boy req-not-choice" position="225,475" size="100,100">A child does a dramatic Ninja pose. He then says &quot;Those cute twins couldn&#39;t resist this!&quot;\
 \
-/% Lab %/\</tw-passagedata><tw-passagedata pid="22" name="ScienceBoyInTheLab" tags="sticky-card req-science_boy req-lab req-not-choice" position="225,350" size="100,100">A green smoke plume comes flowing out from behind one of the lab tables. It&#39;s better if you don&#39;t go near it.\
+/% Twins %/\</tw-passagedata><tw-passagedata pid="33" name="JoanAndJonahComplain" tags="sticky-card req-joan req-jonah req-not-choice" position="350,475" size="100,100">A girl with a pink bow says &quot;I can&#39;t believe how mean the security lady is.&quot; A girl with a red bow replies &quot;Yeah. Even the grumpy granny is nicer than she is.&quot;\
+\</tw-passagedata><tw-passagedata pid="34" name="JoanAndJonahDiscussBoys" tags="sticky-card req-joan req-jonah req-not-choice" position="475,475" size="100,100">A girl with a pink bow says &quot;That little Ninja Boy is kind of cute.&quot; A girl with a red bow replies &quot;But he&#39;s dumb. I like that little Science Boy better.&quot;\
 \
-/% Science Boy %/\</tw-passagedata><tw-passagedata pid="23" name="ScienceBoyDiscussesGirls" tags="sticky-card req-science_boy req-not-choice" position="350,350" size="100,100">A small boy wearing an adult&#39;s lab coat says, without taking his eyes off of a bubbling purple liquid he is pouring, &quot;Get out of here. You girls are in the way.&quot;\
+/% Lab %/\</tw-passagedata><tw-passagedata pid="35" name="ScienceBoyInTheLab" tags="sticky-card req-science_boy req-lab req-not-choice" position="600,475" size="100,100">A green smoke plume comes flowing out from behind one of the lab tables. It&#39;s better if you don&#39;t go near it.\
 \
-/% Break Room %/\</tw-passagedata><tw-passagedata pid="24" name="GrumpyGrannyCaught" tags="card req-grumpy_granny req-break_room req-cookie_clues-during-quest req-not-choice" position="475,350" size="100,100">&lt;&lt;nobr&gt;&gt;
+/% Science Boy %/\</tw-passagedata><tw-passagedata pid="36" name="ScienceBoyDiscussesGirls" tags="sticky-card req-science_boy req-not-choice" position="725,475" size="100,100">A small boy wearing an adult&#39;s lab coat says, without taking his eyes off of a bubbling purple liquid he is pouring, &quot;Get out of here. You girls are in the way.&quot;\
+\
+/% Break Room %/\</tw-passagedata><tw-passagedata pid="37" name="GrumpyGrannyCaught" tags="card req-grumpy_granny req-break_room req-cookie_clues-during-quest req-not-choice" position="850,475" size="100,100">&lt;&lt;nobr&gt;&gt;
 You see an elderly lady quickly turn to hide her face. She clearly had crumbs all over her face...cookie crumbs!
 &lt;&lt;advance &quot;$cookie_clues&quot; &quot;cookie_thief_discovered&quot;&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;\
-\</tw-passagedata><tw-passagedata pid="25" name="GrumpyGrannyLookingForNomNoms" tags="sticky-card req-grumpy_granny req-break_room req-not-choice" position="600,350" size="100,100">An elderly lady is searching through cabinets. &quot;There must be something around here I can eat&quot; she says.\
+\</tw-passagedata><tw-passagedata pid="38" name="GrumpyGrannyLookingForNomNoms" tags="sticky-card req-grumpy_granny req-break_room req-not-choice" position="975,475" size="100,100">An elderly lady is searching through cabinets. &quot;There must be something around here I can eat&quot; she says.\
 \
-/% Grumpy Granny %/\</tw-passagedata><tw-passagedata pid="26" name="GrumpyGrannyIsGrumpy" tags="sticky-card req-grumpy_granny req-not-choice" position="725,350" size="100,100">&quot;What are you doing here? Get out of here you runt&quot; says an old lady.\
+/% Grumpy Granny %/\</tw-passagedata><tw-passagedata pid="39" name="GrumpyGrannyIsGrumpy" tags="sticky-card req-grumpy_granny req-not-choice" position="1100,475" size="100,100">&quot;What are you doing here? Get out of here you runt!&quot; says an old lady.\
 \
-/% Any %/\</tw-passagedata><tw-passagedata pid="27" name="CanIBeADetective" tags="card important req-cookie_clues-during-quest req-not-choice" position="850,350" size="100,100">I just had a brilliant idea! I could dress up like a detective and hunt for clues!
-I would need:
-* A detective&#39;s hat
-* A trench coat
-* A magnifying glass
-* A pipe
-\
-&lt;&lt;advance &quot;$detective&quot; &quot;making_of_a_detective&quot;&gt;&gt;\
-\
-/% Choices. %/\</tw-passagedata><tw-passagedata pid="28" name="Confront the elderly lady about the cookie crumbs" tags="card req-choice req-grumpy_granny req-cookie_clues-during-cookie_thief_discovered" position="975,350" size="100,100">&quot;I didn&#39;t do anything you sneaky lying brat!&quot;
+/% Choices. %/\</tw-passagedata><tw-passagedata pid="40" name="Confront the elderly lady about the cookie crumbs" tags="card req-choice req-grumpy_granny req-cookie_clues-during-cookie_thief_discovered" position="1225,475" size="100,100">&quot;I didn&#39;t do anything you sneaky lying brat!&quot;
 
 [[Yikes!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="29" name="Ask the twins &quot;Who&#39;s who?&quot;" tags="card req-choice req-joan req-jonah" position="1100,350" size="100,100">&quot;We feel so insulted&quot; said the girl with the pink bow. &quot;We&#39;re never talking to you again&quot; said the girl with the red bow.
+\</tw-passagedata><tw-passagedata pid="41" name="Ask the twins &quot;Who&#39;s who?&quot;" tags="card req-choice req-joan req-jonah" position="100,600" size="100,100">&quot;We feel so insulted&quot; said the girl with the pink bow. &quot;We&#39;re never talking to you again&quot; said the girl with the red bow.
 
 [[That&#39;s too bad.-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="30" name="Search the lobby for detective outfits" tags="card important req-choice req-lobby req-detective-during-making_of_a_detective" position="1225,350" size="100,100">After searching for 23 minutes and 54 seconds, you find a pipe in an air vent. How did it get there? Who knows. You blow on the pipe to clear it of dust but to your surprise you get a family of spiders on your face instead!
-&lt;&lt;set $detective_pipe to true&gt;&gt;\
-&lt;&lt;include DetectiveEquipment&gt;&gt;\
-[[Eek!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="31" name="Search the security office for detective outfits" tags="card important req-choice req-security_office req-detective-during-making_of_a_detective" position="100,475" size="100,100">You found a dusty detective&#39;s hat hidden under a cabinet! This will be super useful! You find your reflection on bullet proof glass, plop the hat on your head with a cloud of dust, and marvel at the look.
-&lt;&lt;set $detective_hat to true&gt;&gt;\
-&lt;&lt;include DetectiveEquipment&gt;&gt;\
-[[Woo hoo!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="32" name="Search the break room for detective outfits" tags="card important req-choice req-break_room req-detective-during-making_of_a_detective" position="225,475" size="100,100">In the first cabinet you open, you find a pristine trench coat folded up nicely. It&#39;s in your size as well. Sweet!
-&lt;&lt;set $detective_trench_coat to true&gt;&gt;\
-&lt;&lt;include DetectiveEquipment&gt;&gt;\
-[[Woo hoo!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="33" name="Search the conference room for detective outfits" tags="card important req-choice req-conference_room req-detective-during-making_of_a_detective" position="350,475" size="100,100">You search the conference room top to bottom left to right. You only find skeletons in the closet. Oh well.
-
-[[Gotta look elsewhere-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="34" name="Search the lab for detective outfits" tags="card important req-choice req-lab req-detective-during-making_of_a_detective" position="475,475" size="100,100">You look on every pile of junk then look through every drawer. In the end, you found a magnifying glass in the trash can! You wipe the mayonnaise off and stick it in your pocket.
-&lt;&lt;set $detective_magnifying_glass to true&gt;&gt;\
-&lt;&lt;include DetectiveEquipment&gt;&gt;\
-[[Woo hoo!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="35" name="Search the lobby for clues" tags="card important req-choice req-lobby req-detective-during-determined_detective" position="600,475" size="100,100">You use your super genius detective deductive skills to find a pile of cookies stashed away under a couch cushion.
-
-[[They must be sampled!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="36" name="Search the security office for clues" tags="card important req-choice req-security_office req-detective-during-determined_detective" position="725,475" size="100,100">You turn on your extreme cyber punk detective perception. You find muddy footprints leading out of the office. You make a cast of the footprints using toothpaste.
-
-[[Now to find the suspect!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="37" name="Search the break room clues" tags="card important req-choice req-break_room req-detective-during-determined_detective" position="850,475" size="100,100">You take out the mayonnaise streaked magnifying glass and search every square inch of the donuts on the counter. After enjoying a donut, you then find cookie crumbs in the sink.
-
-[[It seems you found the scene of the crime!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="38" name="Search the conference room for clues" tags="card important req-choice req-conference_room req-detective-during-determined_detective" position="975,475" size="100,100">You turn on your detective x-ray vision and find a suspicious coat in the closet. It looks like it is big enough to hide cookies! You take the coat off of the skeleton and take it with you as evidence.
-
-[[The evidence is mounting!-&gt;Hub]]
-\</tw-passagedata><tw-passagedata pid="39" name="Search the lab for clues" tags="card important req-choice req-lab req-detective-during-determined_detective" position="1100,475" size="100,100">You search the lab and find a thing.
-
-[[Yay! Now I have a thing!-&gt;Hub]]
 \
-/% The end %/</tw-passagedata><tw-passagedata pid="40" name="Leave" tags="" position="1225,475" size="100,100">!The mystery is solved!
-You gleefully leave the building.
-\
-/% Other %/</tw-passagedata><tw-passagedata pid="41" name="DetectiveEquipment" tags="" position="100,600" size="100,100">&lt;&lt;if $detective_hat and $detective_magnifying_glass and $detective_pipe and $detective_trench_coat&gt;&gt;
-    &lt;strong&gt;I have everything I need to be a detective. I am...the &lt;em&gt;determined detective&lt;/em&gt;!&lt;/strong&gt;
-    &lt;&lt;advance &quot;$detective&quot; &quot;determined_detective&quot;&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
 
 /%
 Science Boy blamed story
@@ -313,11 +311,6 @@ Detective story
     You get excited about your task and dress up as a detective to investigate the mystery. You need to find a detective&#39;s hat (they are called deerstalker), a magnifying glass, a detective&#39;s coat (trench coat), and a pipe. You will then be able to use these to discover one or more clues as to who caused the crime. Maybe you can interview people and look for crumbs with the magnifying glass.
 
     You won&#39;t be able to investigate the kitchenette until Grumpy Granny is sent somewhere else.
-
-    Pipe: In lobby
-    Hat: Security office
-    Magnifying glass: In lab
-    Coat: Break room
 
 Telling the twins apart
     One of the twins will ask you who she is. After you tell her, she will say you are wrong. You have to double down on saying who she is. If you do (and get it right), then you will get 1 reputation with each of the twins.
@@ -336,14 +329,6 @@ Granny lure
 
 Science boy lure
     Tell the science boy that there is a tesla coil in a different room.
-
-Determined detective stories
-    There will be one clue that the determined detective can find in each room. You become the determined detective once you get all the pieces required to make the detective outfit.
-    Lobby: hidden cookies
-    Security Office: muddy footprints
-    Break Room: Cookie crumbs
-    Conference Room: suspicious coat
-    Lab: tbd
 
 You can interrogate people about the clues
     Who hid the cookies? (Grumpy Granny; she then forgot about them)

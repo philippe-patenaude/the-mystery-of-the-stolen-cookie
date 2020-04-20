@@ -1,0 +1,24 @@
+::Search the lobby for clues [card important req-choice req-lobby req-detective-during-determined_detective]
+You use your super genius detective deductive skills to find a pile of cookies stashed away under a couch cushion.
+
+[[They must be sampled!->Hub]]
+\
+::Search the security office for clues [card important req-choice req-security_office req-detective-during-determined_detective]
+You turn on your extreme cyber punk detective perception. You find muddy footprints leading out of the office. You make a cast of the footprints using toothpaste.
+
+[[Now to find the suspect!->Hub]]
+\
+::Search the break room clues [card important req-choice req-break_room req-detective-during-determined_detective]
+You take out the mayonnaise streaked magnifying glass and search every square inch of the donuts on the counter. After enjoying a donut, you then find cookie crumbs in the sink.
+
+[[It seems you found the scene of the crime!->Hub]]
+\
+::Search the conference room for clues [card important req-choice req-conference_room req-detective-during-determined_detective]
+You turn on your detective x-ray vision and find a suspicious coat in the closet. It looks like it is big enough to hide cookies! You take the coat off of the skeleton and take it with you as evidence.
+
+[[The evidence is mounting!->Hub]]
+\
+::Search the lab for clues [card important req-choice req-lab req-detective-during-determined_detective]
+You search the lab and find... a mysterious... thing.
+
+[[Yay! Now I have a thing!->Hub]]
