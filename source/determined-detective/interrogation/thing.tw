@@ -1,0 +1,29 @@
+::Ask Science Boy about the mysterious thing. [card req-science_boy req-choice req-detective_clue_mysterious_thing]
+...
+
+[[Back->Hub]]
+\
+::Ask Grumpy Granny about the mysterious thing. [card req-grumpy_granny req-choice req-detective_clue_mysterious_thing]
+...
+
+[[Back->Hub]]
+\
+::Ask Ninja Boy about the mysterious thing. [card req-ninja_boy req-choice req-detective_clue_mysterious_thing]
+...
+
+[[Back->Hub]]
+\
+::Ask the security officer lady about the mysterious thing. [card req-security_officer_lady req-choice req-detective_clue_mysterious_thing]
+...
+
+[[Back->Hub]]
+\
+::Ask red bow girl about the mysterious thing. [card req-jonah req-choice req-detective_clue_mysterious_thing]
+...
+
+[[Back->Hub]]
+\
+::Ask pink bow girl about the mysterious thing. [card req-joan req-choice req-detective_clue_mysterious_thing]
+...
+
+[[Back->Hub]]

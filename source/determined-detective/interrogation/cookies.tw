@@ -1,0 +1,29 @@
+::Ask Science Boy about the pile of hidden cookies. [card req-science_boy req-choice req-detective_clue_cookies]
+"I don't even like cookies."
+
+[[What a liar.->Hub]]
+\
+::Ask Grumpy Granny about the pile of hidden cookies. [card req-grumpy_granny req-choice req-detective_clue_cookies]
+"How dare you accuse me of stealing cookies!"
+
+[[Yup. Definitely guilty.->Hub]]
+\
+::Ask Ninja Boy about the pile of hidden cookies. [card req-ninja_boy req-choice req-detective_clue_cookies]
+...
+
+[[Back->Hub]]
+\
+::Ask the security officer lady about the pile of hidden cookies. [card req-security_officer_lady req-choice req-detective_clue_cookies]
+...
+
+[[Back->Hub]]
+\
+::Ask red bow girl about the pile of hidden cookies. [card req-jonah req-choice req-detective_clue_cookies]
+...
+
+[[Back->Hub]]
+\
+::Ask pink bow girl about the pile of hidden cookies. [card req-joan req-choice req-detective_clue_cookies]
+...
+
+[[Back->Hub]]

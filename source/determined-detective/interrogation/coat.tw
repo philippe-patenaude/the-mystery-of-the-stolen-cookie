@@ -1,0 +1,29 @@
+::Ask Science Boy about the suspicious coat. [card req-science_boy req-choice req-detective_clue_coat]
+...
+
+[[Back->Hub]]
+\
+::Ask Grumpy Granny about the suspicious coat. [card req-grumpy_granny req-choice req-detective_clue_coat]
+...
+
+[[Back->Hub]]
+\
+::Ask Ninja Boy about the suspicious coat. [card req-ninja_boy req-choice req-detective_clue_coat]
+...
+
+[[Back->Hub]]
+\
+::Ask the security officer lady about the suspicious coat. [card req-security_officer_lady req-choice req-detective_clue_coat]
+...
+
+[[Back->Hub]]
+\
+::Ask red bow girl about the suspicious coat. [card req-jonah req-choice req-detective_clue_coat]
+...
+
+[[Back->Hub]]
+\
+::Ask pink bow girl about the suspicious coat. [card req-joan req-choice req-detective_clue_coat]
+...
+
+[[Back->Hub]]

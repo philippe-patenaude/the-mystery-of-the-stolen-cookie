@@ -1,0 +1,29 @@
+::Ask Science Boy about the cookie crumbs. [card req-science_boy req-choice req-detective_clue_cookie_crumbs]
+...
+
+[[Back->Hub]]
+\
+::Ask Grumpy Granny about the cookie crumbs. [card req-grumpy_granny req-choice req-detective_clue_cookie_crumbs]
+...
+
+[[Back->Hub]]
+\
+::Ask Ninja Boy about the cookie crumbs. [card req-ninja_boy req-choice req-detective_clue_cookie_crumbs]
+...
+
+[[Back->Hub]]
+\
+::Ask the security officer lady about the cookie crumbs. [card req-security_officer_lady req-choice req-detective_clue_cookie_crumbs]
+...
+
+[[Back->Hub]]
+\
+::Ask red bow girl about the cookie crumbs. [card req-jonah req-choice req-detective_clue_cookie_crumbs]
+...
+
+[[Back->Hub]]
+\
+::Ask pink bow girl about the cookie crumbs. [card req-joan req-choice req-detective_clue_cookie_crumbs]
+...
+
+[[Back->Hub]]

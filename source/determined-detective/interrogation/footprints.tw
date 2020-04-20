@@ -1,0 +1,29 @@
+::Ask Science Boy about the muddy footprints. [card req-science_boy req-choice req-detective_clue_footprints]
+...
+
+[[Back->Hub]]
+\
+::Ask Grumpy Granny about the muddy footprints. [card req-grumpy_granny req-choice req-detective_clue_footprints]
+...
+
+[[Back->Hub]]
+\
+::Ask Ninja Boy about the muddy footprints. [card req-ninja_boy req-choice req-detective_clue_footprints]
+...
+
+[[Back->Hub]]
+\
+::Ask the security officer lady about the muddy footprints. [card req-security_officer_lady req-choice req-detective_clue_footprints]
+...
+
+[[Back->Hub]]
+\
+::Ask red bow girl about the muddy footprints. [card req-jonah req-choice req-detective_clue_footprints]
+...
+
+[[Back->Hub]]
+\
+::Ask pink bow girl about the muddy footprints. [card req-joan req-choice req-detective_clue_footprints]
+...
+
+[[Back->Hub]]
