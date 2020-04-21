@@ -1,12 +1,28 @@
 ::Ask Science Boy about the suspicious coat. [card req-science_boy req-choice req-detective_clue_coat]
-...
+"What are you doing with my coat?" asked Science Boy.
 
-[[Back->Hub]]
+You turn on your interview voice.
+
+[[Did you hide cookies in your coat?->ScienceBoyInterrogationHidesCookies]]
+[[Why was it on a skeleton?->ScienceBoyInterrogationSkeleton]]
+\
+::ScienceBoyInterrogationHidesCookies
+"No."
+
+[[I think you did.->ScienceBoyInterrogationHidesCookies]]
+[[Why was it on a skeleton?->ScienceBoyInterrogationSkeleton]]
+\
+::ScienceBoyInterrogationSkeleton
+"It is too bulky to wear the coat under my lab coat, so I found a closet to put it in. There was a skeleton shaped coat hanger in the closet, so I used it for my coat."
+
+I'm pretty sure that wasn't a close hanger...
+
+[[Search for more clues.->Hub]]
 \
 ::Ask Grumpy Granny about the suspicious coat. [card req-grumpy_granny req-choice req-detective_clue_coat]
-...
+"Leave me alone!"
 
-[[Back->Hub]]
+[[Well, that wasn't very helpful.->Hub]]
 \
 ::Ask Ninja Boy about the suspicious coat. [card req-ninja_boy req-choice req-detective_clue_coat]
 ...
