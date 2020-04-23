@@ -9,21 +9,21 @@
 [[Yup. Definitely guilty.->Hub]]
 \
 ::Ask Ninja Boy about the pile of hidden cookies. [card req-ninja_boy req-choice req-detective_clue_cookies]
-...
+He jumps on you grabs a cookie in his mouth and runs off.
 
-[[Back->Hub]]
+[[Very suspicious.->Hub]]
 \
 ::Ask the security officer lady about the pile of hidden cookies. [card req-security_officer_lady req-choice req-detective_clue_cookies]
-...
+"My cookies! Where did you find them?" she asks in disbelief. "Who would hide them instead of eating them all? Oh wait, is that dust on them? Eww gross. You can keep them."
 
-[[Back->Hub]]
+[[So she doesn't like them covered in dust. Very useful information.->Hub]]
 \
 ::Ask red bow girl about the pile of hidden cookies. [card req-jonah req-choice req-detective_clue_cookies]
-...
+"No, I don't want any. I don't like cookies."
 
-[[Back->Hub]]
+[[Very weird. Who doesn't like cookies?->Hub]]
 \
 ::Ask pink bow girl about the pile of hidden cookies. [card req-joan req-choice req-detective_clue_cookies]
-...
+"No, I don't want any. I don't like cookies."
 
-[[Back->Hub]]
+[[Very weird. Who doesn't like cookies?->Hub]]

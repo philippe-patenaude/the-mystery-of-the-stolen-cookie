@@ -1,29 +1,42 @@
 ::Ask Science Boy about the cookie crumbs. [card req-science_boy req-choice req-detective_clue_cookie_crumbs]
-...
+"I haven't been to the break room."
 
-[[Back->Hub]]
+[[We'll see about that!->Hub]]
 \
 ::Ask Grumpy Granny about the cookie crumbs. [card req-grumpy_granny req-choice req-detective_clue_cookie_crumbs]
-...
+"Get out of here you runt!"
 
-[[Back->Hub]]
+[[About as useful as any answer other than a useful one.->Hub]]
 \
 ::Ask Ninja Boy about the cookie crumbs. [card req-ninja_boy req-choice req-detective_clue_cookie_crumbs]
-...
+"I saw the old lady eating in the break room. I then stabbed her in the back."
 
-[[Back->Hub]]
+[[But... why? I mean, she did yell at me, so... good job! Stab her again for me.->Hub]]
+[[What was she eating?->WhatWasSheEating]]
+\
+::WhatWasSheEating
+"I don't know. I saw donuts on the counter."
+
+[[Grr. So much for being a ninja->Hub]]
 \
 ::Ask the security officer lady about the cookie crumbs. [card req-security_officer_lady req-choice req-detective_clue_cookie_crumbs]
-...
+"My poor cookies being eaten by a mongrel! If only the security camera in the break room was real."
 
-[[Back->Hub]]
+[[What other cameras are fake?->Hub]]
 \
 ::Ask red bow girl about the cookie crumbs. [card req-jonah req-choice req-detective_clue_cookie_crumbs]
-...
+"Why are you showing me that? Gross!"
 
-[[Back->Hub]]
+[[Lick it!->LickIt]]
+[[Who doesn't like the tasty cookie crumb morsels?->Hub]]
 \
 ::Ask pink bow girl about the cookie crumbs. [card req-joan req-choice req-detective_clue_cookie_crumbs]
-...
+"Why are you showing me that? Gross!"
 
-[[Back->Hub]]
+[[Lick it!->LickIt]]
+[[Who doesn't like the tasty cookie crumb morsels?->Hub]]
+\
+::LickIt
+"Go away! You're so gross!"
+
+[[Who doesn't like the tasty cookie crumb morsels?->Hub]]

@@ -1,29 +1,40 @@
 ::Ask Science Boy about the muddy footprints. [card req-science_boy req-choice req-detective_clue_footprints]
-...
+"I smell mint. Is that toothpaste? That's a horrible way to create a cast!"
 
-[[Back->Hub]]
+[[What about the footprint?->WhatAboutTheFootprint]]
+\
+::WhatAboutTheFootprint
+"Judging by its size and shape, it must be a swamp yeti!"
+
+[[Never heard of it before.->Hub]]
 \
 ::Ask Grumpy Granny about the muddy footprints. [card req-grumpy_granny req-choice req-detective_clue_footprints]
-...
+"You're so annoying you flea!"
 
-[[Back->Hub]]
+[[My feelings are hurt.->Hub]]
+[[My feelings are not hurt in the least. Nope. Not at all. Not even a little bit. You're the flea.->Hub]]
 \
 ::Ask Ninja Boy about the muddy footprints. [card req-ninja_boy req-choice req-detective_clue_footprints]
-...
+Ninja Boy licks the toothpaste. "Tastes like an intruder!" he says.
 
-[[Back->Hub]]
+[[Can you tell who's footprints it is?->NinjaBoyExplainsFootprints]]
+\
+::NinjaBoyExplainsFootprints
+"They are the old lady's footprints. I stepped the boots in mud and through the security office so that nobody would find my hiding spot."
+
+[[That was not where I was expecting this to go.->Hub]]
 \
 ::Ask the security officer lady about the muddy footprints. [card req-security_officer_lady req-choice req-detective_clue_footprints]
-...
+"Who dares sneak into my office! Now I need to mop the floors of this filth, otherwise I'll get sick eating the cookies off the floor!"
 
-[[Back->Hub]]
+[[Umm... gross.->Hub]]
 \
 ::Ask red bow girl about the muddy footprints. [card req-jonah req-choice req-detective_clue_footprints]
-...
+"That's disgusting! Get it away from me!"
 
-[[Back->Hub]]
+[[Oh well. I tried. She won't listen to reason.->Hub]]
 \
 ::Ask pink bow girl about the muddy footprints. [card req-joan req-choice req-detective_clue_footprints]
-...
+"That's disgusting! Get it away from me!"
 
-[[Back->Hub]]
+[[Oh well. I tried. She won't listen to reason.->Hub]]

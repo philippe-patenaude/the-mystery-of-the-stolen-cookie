@@ -1,7 +1,7 @@
 ::Ask Science Boy about the suspicious coat. [card req-science_boy req-choice req-detective_clue_coat]
 "What are you doing with my coat?" asked Science Boy.
 
-You turn on your interview voice.
+You turn on your interrogation voice.
 
 [[Did you hide cookies in your coat?->ScienceBoyInterrogationHidesCookies]]
 [[Why was it on a skeleton?->ScienceBoyInterrogationSkeleton]]
@@ -15,7 +15,7 @@ You turn on your interview voice.
 ::ScienceBoyInterrogationSkeleton
 "It is too bulky to wear the coat under my lab coat, so I found a closet to put it in. There was a skeleton shaped coat hanger in the closet, so I used it for my coat."
 
-I'm pretty sure that wasn't a close hanger...
+I'm pretty sure that wasn't a coat hanger...
 
 [[Search for more clues.->Hub]]
 \
@@ -25,21 +25,33 @@ I'm pretty sure that wasn't a close hanger...
 [[Well, that wasn't very helpful.->Hub]]
 \
 ::Ask Ninja Boy about the suspicious coat. [card req-ninja_boy req-choice req-detective_clue_coat]
-...
+He tries to cut the coat to ribbons with his imaginary sword.
 
-[[Back->Hub]]
+[[Umm...okay.->Hub]]
 \
 ::Ask the security officer lady about the suspicious coat. [card req-security_officer_lady req-choice req-detective_clue_coat]
-...
+"That coat looks gross! Get it away from me."
 
-[[Back->Hub]]
+[[Suspicious.->Hub]]
 \
 ::Ask red bow girl about the suspicious coat. [card req-jonah req-choice req-detective_clue_coat]
-...
+"I would never wear that!"
 
-[[Back->Hub]]
+[[Ask what her name is.->NameMe]]
+[["Do you know who would wear it?"->WhoWouldWearIt]]
 \
 ::Ask pink bow girl about the suspicious coat. [card req-joan req-choice req-detective_clue_coat]
-...
+"I would never wear that!"
 
-[[Back->Hub]]
+[[Ask what her name is->NameMe]]
+[["Do you know who would wear it?"->WhoWouldWearIt]]
+\
+::NameMe
+"What do you think my name is?" she says angrily.
+
+[[Better to leave her alone.->Hub]]
+\
+::WhoWouldWearIt
+"Well, it's too small for Grumpy Granny and Security Officer Lady, so probably one of the boys."
+
+[[What an astute observation.->Hub]]
